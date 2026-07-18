@@ -1,4 +1,4 @@
-// src/components/sections/SkillsSection.jsx
+// src/ui/Skills.jsx
 import Animblock from "../function/Animblock";
 import Skillbar  from "../function/Skillbar";
 
@@ -6,30 +6,35 @@ export default function Skills({ skills }) {
   return (
     <section
       id="skills"
-      style={{ padding: "120px 48px", background: "#111", position: "relative", overflow: "hidden" }}
+      className="px-6 md:px-12 py-24 md:py-32 bg-[#111] relative overflow-hidden"
     >
       {/* Kanji watermark */}
-      <div style={{
-        position: "absolute", right: -60, top: "50%", transform: "translateY(-50%)",
-        fontSize: 260, color: "rgba(255,255,255,0.03)", lineHeight: 1,
-        fontFamily: "'Noto Serif JP', serif", userSelect: "none",
-      }}>術</div>
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none font-serif leading-none"
+        style={{ fontSize: "clamp(120px, 20vw, 260px)", color: "rgba(255,255,255,0.025)" }}
+      >術</div>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 2 }}>
+      <div className="max-w-[1100px] mx-auto relative z-10">
+
         <Animblock>
-          <div style={{ fontFamily: "'Courier New', monospace", fontSize: 10, letterSpacing: 6, color: "#555", marginBottom: 32 }}>
-            02 &nbsp;/&nbsp; SKILLS
+          <div className="font-mono text-[10px] tracking-[0.5em] text-[#444] mb-8 uppercase">
+            02 &nbsp;/&nbsp; Skills
           </div>
-          <h2 style={{ fontSize: 42, fontWeight: 300, letterSpacing: -1, color: "#fff", marginBottom: 64 }}>
-            Code<br />
+          <h2 className="font-serif font-light text-[36px] md:text-[42px] tracking-[-0.03em] text-white mb-4 leading-[1.15]">
+            Technical<br />Stack.
           </h2>
+          <p className="font-mono text-[12px] text-[#444] mb-14 max-w-md leading-[1.8]">
+            Tools and technologies I use to build, configure, and maintain systems.
+          </p>
         </Animblock>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 80px" }}>
+        {/* 2-col on desktop, 1-col on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20">
           {skills.map((skill, i) => (
             <Skillbar key={skill.cat} skill={skill} delay={i * 0.1} />
           ))}
         </div>
+
       </div>
     </section>
   );

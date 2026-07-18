@@ -1,3 +1,4 @@
+// src/function/Projectcard.jsx
 import { useState } from "react";
 
 export default function Projectcard({ project }) {
@@ -10,88 +11,70 @@ export default function Projectcard({ project }) {
       rel="noopener noreferrer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        display:        "flex",
-        flexDirection:  "column",
-        justifyContent: "space-between",
-        background:     hovered ? "#111" : "#fafaf8",
-        padding:        48,
-        minHeight:      260,
-        textDecoration: "none",
-        cursor:         "none",
-        transition:     "background 0.4s ease",
-      }}
+      className="flex flex-col justify-between p-8 md:p-10 min-h-[280px] no-underline transition-colors duration-300"
+      style={{ background: hovered ? "#111" : "#fafaf8", cursor: "none" }}
     >
-      {/* Top meta */}
+      {/* Top */}
       <div>
-        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 20 }}>
-          <span style={{
-            fontFamily: "'Courier New', monospace", fontSize: 10,
-            color: hovered ? "#555" : "#ccc", letterSpacing: 3,
-          }}>
+        {/* ID + Year */}
+        <div className="flex justify-between items-center mb-5">
+          <span
+            className="font-mono text-[10px] tracking-[0.25em]"
+            style={{ color: hovered ? "#444" : "#ccc" }}
+          >
             {project.id}
           </span>
-          <span style={{
-            fontFamily: "'Courier New', monospace", fontSize: 10,
-            color: hovered ? "#555" : "#ccc", letterSpacing: 2,
-          }}>
+          <span
+            className="font-mono text-[10px] tracking-[0.15em]"
+            style={{ color: hovered ? "#444" : "#ccc" }}
+          >
             {project.year}
           </span>
         </div>
 
-        <h3 style={{
-          fontSize: 22, fontWeight: 300, letterSpacing: -0.5,
-          color: hovered ? "#fff" : "#111",
-          marginBottom: 12,
-          transition: "color 0.4s ease",
-        }}>
+        {/* Name */}
+        <h3
+          className="font-serif font-light text-[18px] md:text-[20px] tracking-[-0.02em] mb-3 leading-[1.3] transition-colors duration-300"
+          style={{ color: hovered ? "#fff" : "#111" }}
+        >
           {project.name}
         </h3>
 
-        <p style={{
-          fontFamily: "'Courier New', monospace",
-          fontSize: 12, lineHeight: 1.7,
-          color: hovered ? "#666" : "#888",
-          transition: "color 0.4s ease",
-        }}>
+        {/* Description — more readable size */}
+        <p
+          className="font-mono text-[12px] leading-[1.75] transition-colors duration-300"
+          style={{ color: hovered ? "#666" : "#777" }}
+        >
           {project.desc}
         </p>
       </div>
 
-      {/* Bottom — tags + link arrow */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: 24 }}>
-
-        {/* Tags */}
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+      {/* Bottom — tags + arrow */}
+      <div className="flex justify-between items-end mt-6 gap-4">
+        <div className="flex flex-wrap gap-2">
           {project.tags.map(t => (
-            <span key={t} style={{
-              fontFamily: "'Courier New', monospace",
-              fontSize: 9, letterSpacing: 2,
-              padding: "4px 10px",
-              border: `1px solid ${hovered ? "#333" : "#e0e0e0"}`,
-              color:  hovered ? "#555" : "#aaa",
-              transition: "all 0.4s ease",
-            }}>
+            <span
+              key={t}
+              className="font-mono text-[9px] tracking-[0.12em] px-2.5 py-1 transition-all duration-300"
+              style={{
+                border: `1px solid ${hovered ? "#333" : "#e0e0e0"}`,
+                color:  hovered ? "#555" : "#aaa",
+              }}
+            >
               {t}
             </span>
           ))}
         </div>
 
-        {/* Arrow indicator */}
-        <span style={{
-          fontFamily: "'Courier New', monospace",
-          fontSize: 11,
-          color: hovered ? "#fff" : "#ddd",
-          letterSpacing: 1,
-          transition: "all 0.4s ease",
-          transform: hovered ? "translate(3px, -3px)" : "translate(0, 0)",
-          display: "inline-block",
-          flexShrink: 0,
-          marginLeft: 16,
-        }}>
-          ↗
-        </span>
-
+        {/* Arrow */}
+        <span
+          className="font-mono text-[13px] shrink-0 transition-all duration-300"
+          style={{
+            color:     hovered ? "#fff" : "#ddd",
+            transform: hovered ? "translate(3px, -3px)" : "translate(0,0)",
+            display:   "inline-block",
+          }}
+        >↗</span>
       </div>
     </a>
   );

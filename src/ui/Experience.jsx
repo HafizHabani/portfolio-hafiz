@@ -1,4 +1,4 @@
-// src/components/sections/ExperienceSection.jsx
+// src/ui/Experience.jsx
 import Animblock     from "../function/Animblock";
 import Experiencerow from "../function/Experiencerow";
 
@@ -6,23 +6,26 @@ export default function Experience({ experience }) {
   return (
     <section
       id="experience"
-      style={{ padding: "120px 48px", background: "#fafaf8", borderTop: "1px solid #e8e8e8" }}
+      className="px-6 md:px-12 py-24 md:py-32 bg-[#fafaf8] border-t border-[#e8e8e8]"
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <div className="max-w-[1100px] mx-auto">
 
         <Animblock>
-          <div style={{ fontFamily: "'Courier New', monospace", fontSize: 10, letterSpacing: 6, color: "#aaa", marginBottom: 32 }}>
-            04 &nbsp;/&nbsp; EXPERIENCE
+          <div className="font-mono text-[10px] tracking-[0.5em] text-[#bbb] mb-8 uppercase">
+            04 &nbsp;/&nbsp; Experience
           </div>
-          <h2 style={{ fontSize: 42, fontWeight: 300, letterSpacing: -1, marginBottom: 64 }}>
-            Perjalanan<br />Karier.
+          <h2 className="font-serif font-light text-[36px] md:text-[42px] tracking-[-0.03em] mb-3 leading-[1.15]">
+            Work<br />Experience.
           </h2>
+          <p className="font-mono text-[12px] text-[#888] mb-14 max-w-lg leading-[1.8]">
+            Roles and responsibilities across IT support, infrastructure, and development.
+          </p>
         </Animblock>
 
         <div>
-            {experience.map((exp, i) => (
-                <Animblock key={i} delay={i * 0.15}>
-                <Experiencerow exp={exp} isLast={i === experience.length - 1} />
+          {experience.map((exp, i) => (
+            <Animblock key={i} delay={i * 0.12}>
+              <Experiencerow exp={exp} isLast={i === experience.length - 1} />
             </Animblock>
           ))}
         </div>

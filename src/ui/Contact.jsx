@@ -1,87 +1,113 @@
-// src/components/sections/ContactSection.jsx
+// src/ui/Contact.jsx
 import Animblock from "../function/Animblock";
 
 export default function Contact({ data }) {
+  const links = [
+    { key: "Email",    val: data.contact.email,    href: `mailto:${data.contact.email}` },
+    { key: "GitHub",   val: data.contact.github,   href: `https://${data.contact.github}` },
+    { key: "LinkedIn", val: data.contact.linkedin, href: `https://${data.contact.linkedin}` },
+    { key: "Location", val: data.contact.location, href: null },
+  ];
+
   return (
     <section
       id="contact"
-      style={{ padding: "120px 48px", background: "#111", position: "relative", overflow: "hidden" }}
+      className="px-6 md:px-12 py-24 md:py-32 bg-[#111] relative overflow-hidden"
     >
       {/* Kanji watermark */}
-      <div style={{
-        position: "absolute", left: -40, bottom: -80,
-        fontSize: 280, color: "rgba(255,255,255,0.03)", lineHeight: 1,
-        fontFamily: "'Noto Serif JP', serif", userSelect: "none",
-      }}>繋</div>
+      <div
+        className="absolute -left-8 -bottom-16 select-none pointer-events-none font-serif leading-none"
+        style={{ fontSize: "clamp(120px, 22vw, 280px)", color: "rgba(255,255,255,0.025)" }}
+      >繋</div>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 2 }}>
+      <div className="max-w-[1100px] mx-auto relative z-10">
 
         <Animblock>
-          <div style={{ fontFamily: "'Courier New', monospace", fontSize: 10, letterSpacing: 6, color: "#555", marginBottom: 32 }}>
-            05 &nbsp;/&nbsp; CONTACT
+          <div className="font-mono text-[10px] tracking-[0.5em] text-[#444] mb-8 uppercase">
+            05 &nbsp;/&nbsp; Contact
           </div>
-          <h2 style={{ fontSize: 64, fontWeight: 300, letterSpacing: -2, color: "#fff", lineHeight: 1.1, marginBottom: 64 }}>
-            Mari<br />Berkolaborasi.
+          <h2 className="font-serif font-light text-[36px] md:text-[56px] tracking-[-0.03em] text-white mb-4 leading-[1.1]">
+            Let's<br />Collaborate.
           </h2>
+          <p className="font-mono text-[13px] text-[#444] mb-14 max-w-md leading-[1.8]">
+            Open for freelance projects, full-time opportunities, or a casual tech discussion.
+          </p>
         </Animblock>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80 }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
 
-          {/* CTA */}
-          <Animblock delay={0.2}>
-            <p style={{ fontFamily: "'Courier New', monospace", fontSize: 13, color: "#555", lineHeight: 1.8, marginBottom: 40 }}>
-              Terbuka untuk project freelance, full-time opportunity, atau sekadar diskusi teknologi.
-            </p>
+          {/* CTA button */}
+          <Animblock delay={0.15}>
             <a
               href={`mailto:${data.contact.email}`}
-              style={{
-                display: "inline-block",
-                fontFamily: "'Courier New', monospace", fontSize: 12, letterSpacing: 3,
-                color: "#fff", textDecoration: "none",
-                border: "1px solid #333", padding: "16px 32px",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={e => { e.target.style.background = "#fff"; e.target.style.color = "#111"; }}
-              onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.color = "#fff"; }}
+              className="inline-block font-mono text-[11px] tracking-[0.25em] uppercase text-white border border-[#333] px-8 py-4 transition-all duration-300 hover:bg-white hover:text-[#111] mb-12"
+              style={{ cursor: "none" }}
             >
-              KIRIM PESAN →
+              Send a Message →
             </a>
+
+            {/* Social links */}
+            <div className="flex flex-col gap-1">
+              {links.map(({ key, val, href }) => (
+                <div key={key} className="flex justify-between items-center py-4 border-b border-[#1a1a1a]">
+                  <span className="font-mono text-[10px] tracking-[0.3em] text-[#444] uppercase">
+                    {key}
+                  </span>
+                  {href ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-[11px] text-[#666] hover:text-white transition-colors duration-200 tracking-[0.02em]"
+                      style={{ cursor: "none" }}
+                    >
+                      {val}
+                    </a>
+                  ) : (
+                    <span className="font-mono text-[11px] text-[#555] tracking-[0.02em]">{val}</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </Animblock>
 
-          {/* Contact list */}
-          <Animblock delay={0.3}>
-            {[
-              ["Email",    data.contact.email],
-              ["GitHub",   data.contact.github],
-              ["LinkedIn", data.contact.linkedin],
-              ["Location", data.contact.location],
-            ].map(([k, v]) => (
-              <div key={k} style={{
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-                padding: "20px 0", borderBottom: "1px solid #222",
-              }}>
-                <span style={{ fontFamily: "'Courier New', monospace", fontSize: 10, letterSpacing: 3, color: "#444" }}>
-                  {k.toUpperCase()}
-                </span>
-                <span style={{ fontFamily: "'Courier New', monospace", fontSize: 12, color: "#888" }}>
-                  {v}
+          {/* Availability card */}
+          <Animblock delay={0.25}>
+            <div className="border border-[#1e1e1e] p-8 relative">
+              <div className="absolute -top-px left-8 bg-[#111] px-3 font-mono text-[9px] tracking-[0.25em] text-[#333] uppercase">
+                Status
+              </div>
+
+              {/* Green dot + status */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-mono text-[11px] tracking-[0.15em] text-[#555]">
+                  Available for Work
                 </span>
               </div>
-            ))}
+
+              <p className="font-mono text-[12px] text-[#333] leading-[1.8] mb-6">
+                Currently open to IT Engineering roles, freelance web projects, and infrastructure consulting engagements.
+              </p>
+
+              {/* Response time */}
+              <div className="border-t border-[#1a1a1a] pt-6">
+                <div className="font-mono text-[9px] tracking-[0.3em] text-[#333] uppercase mb-1">
+                  Avg. Response Time
+                </div>
+                <div className="font-serif font-light text-[22px] text-white tracking-[-0.02em]">
+                  &lt; 24 hours
+                </div>
+              </div>
+            </div>
           </Animblock>
 
         </div>
 
         {/* Footer */}
-        <div style={{
-          marginTop: 80, paddingTop: 40,
-          borderTop: "1px solid #222",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-        }}>
-          <span style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 18, color: "#333" }}>
-            {data.kanji}
-          </span>
-          <span style={{ fontFamily: "'Courier New', monospace", fontSize: 10, letterSpacing: 2, color: "#444" }}>
+        <div className="mt-20 pt-10 border-t border-[#1a1a1a] flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+          <span className="font-serif text-[18px] text-[#2a2a2a]">{data.kanji}</span>
+          <span className="font-mono text-[10px] tracking-[0.15em] text-[#333]">
             © 2025 {data.name} — All rights reserved
           </span>
         </div>

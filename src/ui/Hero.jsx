@@ -1,86 +1,110 @@
-// src/components/sections/HeroSection.jsx
+// src/ui/Hero.jsx
 import Animblock from "../function/Animblock";
 
 export default function Hero({ data, scrollY }) {
+  // Show max 4 stats to avoid overflow
+  const visibleStats = data.stats.slice(0, 4);
+
   return (
     <section
       id="hero"
-      style={{
-        minHeight: "100vh",
-        display: "flex", alignItems: "center",
-        padding: "0 48px",
-        position: "relative", overflow: "hidden",
-      }}
+      className="relative min-h-screen flex items-center overflow-hidden px-6 md:px-12"
     >
       {/* Kanji watermark */}
-      <div style={{
-        position: "absolute", right: 10, top: "50%",
-        fontSize: 320, color: "rgba(0,0,0,0.09)", lineHeight: 1,
-        fontFamily: "'Noto Serif JP', serif", userSelect: "none",
-        transform: `translateY(calc(-50% + ${scrollY * 0.2}px))`,
-      }}>飛</div>
+      <div
+        className="absolute right-0 md:right-4 select-none pointer-events-none z-0"
+        style={{
+          top: "50%",
+          fontSize: "clamp(120px, 22vw, 320px)",
+          color: "rgba(0,0,0,0.06)",
+          fontFamily: "'Noto Serif JP', serif",
+          lineHeight: 1,
+          transform: `translateY(calc(-50% + ${scrollY * 0.15}px))`,
+        }}
+      >飛</div>
 
-      {/* Horizontal decorative lines */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 1, background: "#e8e8e8", zIndex: 0 }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: "30%", height: 1, background: "#f0f0ee", zIndex: 0 }} />
+      {/* Decorative lines */}
+      <div className="absolute inset-x-0 top-1/2 h-px bg-[#e8e8e8] z-0" />
+      <div className="absolute inset-x-0 top-[30%] h-px bg-[#f0f0ee] z-0" />
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, maxWidth: 700 }}>
-        <div style={{
-          fontFamily: "'Courier New', monospace",
-          fontSize: 20, letterSpacing: 6, color: "#888",
-          marginBottom: 24, animation: "fadeUp 0.8s 0.2s ease both",
-        }}>
+      <div className="relative z-10 max-w-3xl pt-24 pb-16">
+
+        {/* Role label */}
+        <div
+          className="font-mono text-[11px] tracking-[0.4em] text-[#888] mb-6"
+          style={{ animation: "fadeUp 0.8s 0.2s ease both" }}
+        >
           {data.role.toUpperCase()} &nbsp;/&nbsp; PORTFOLIO
         </div>
 
-        <h1 style={{
-          fontSize: "clamp(52px, 8vw, 96px)",
-          fontWeight: 300, lineHeight: 1.05, letterSpacing: -2,
-          marginBottom: 8, animation: "fadeUp 0.8s 0.4s ease both",
-        }}>
+        {/* Name */}
+        <h1
+          className="font-serif font-light leading-[1.05] tracking-[-0.03em] mb-4"
+          style={{
+            fontSize: "clamp(40px, 7vw, 88px)",
+            animation: "fadeUp 0.8s 0.4s ease both",
+          }}
+        >
           {data.name.split(" ").map((w, i) => (
-            <span key={i} style={{ display: "block" }}>{w}</span>
+            <span key={i} className="block">{w}</span>
           ))}
         </h1>
 
-        <div style={{
-          fontSize: 20, color: "#888", letterSpacing: 1, marginTop: 20,
-          fontFamily: "'Courier New', monospace",
-          animation: "fadeUp 0.8s 0.6s ease both",
-        }}>
+        {/* Tagline */}
+        <div
+          className="font-mono text-[13px] text-[#888] tracking-[0.05em] mt-4"
+          style={{ animation: "fadeUp 0.8s 0.6s ease both" }}
+        >
           — {data.tagline}
         </div>
 
-        {/* Stats */}
-        <div style={{
-          display: "flex", gap: 0, marginTop: 56,
-          borderTop: "1px solid #e8e8e8",
-          animation: "fadeUp 0.8s 0.8s ease both",
-        }}>
-          {data.stats.map((s, i) => (
-            <div key={s.label} style={{
-              padding: "24px 36px 0 0",
-              borderRight: i < data.stats.length - 1 ? "1px solid #e8e8e8" : "none",
-              marginRight: i < data.stats.length - 1 ? 36 : 0,
-            }}>
-              <div style={{ fontSize: 32, fontWeight: 300, letterSpacing: -1 }}>{s.value}</div>
-              <div style={{ fontSize: 10, letterSpacing: 3, color: "#aaa", fontFamily: "'Courier New', monospace", marginTop: 4 }}>
-                {s.label.toUpperCase()}
+        {/* Stats row — max 4, responsive */}
+        <div
+          className="flex flex-wrap gap-0 mt-12 border-t border-[#e8e8e8]"
+          style={{ animation: "fadeUp 0.8s 0.8s ease both" }}
+        >
+          {visibleStats.map((s, i) => (
+            <div
+              key={s.label}
+              className="pt-6 pr-8 mr-8"
+              style={{
+                borderRight: i < visibleStats.length - 1 ? "1px solid #e8e8e8" : "none",
+              }}
+            >
+              <div className="font-serif font-light text-[28px] md:text-[32px] tracking-[-0.03em] leading-none">
+                {s.value}
+              </div>
+              <div className="font-mono text-[9px] tracking-[0.3em] text-[#aaa] mt-2 uppercase">
+                {s.label}
               </div>
             </div>
           ))}
         </div>
+
+        {/* More stats — collapsed on second row */}
+        {data.stats.length > 4 && (
+          <div
+            className="flex flex-wrap gap-6 mt-6 pt-6 border-t border-[#f0f0ee]"
+            style={{ animation: "fadeUp 0.8s 1s ease both" }}
+          >
+            {data.stats.slice(4).map(s => (
+              <div key={s.label} className="flex items-baseline gap-2">
+                <span className="font-serif font-light text-[18px] text-[#111]">{s.value}</span>
+                <span className="font-mono text-[9px] tracking-[0.2em] text-[#bbb] uppercase">{s.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Scroll indicator */}
-      <div style={{
-        position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
-        animation: "fadeUp 1s 1.2s ease both",
-      }}>
-        <div style={{ fontFamily: "'Courier New', monospace", fontSize: 9, letterSpacing: 4, color: "#ccc" }}>SCROLL</div>
-        <div style={{ width: 1, height: 40, background: "#ccc", animation: "scrollLine 1.5s ease-in-out infinite" }} />
+      <div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        style={{ animation: "fadeUp 1s 1.2s ease both" }}
+      >
+        <span className="font-mono text-[9px] tracking-[0.4em] text-[#ccc]">SCROLL</span>
+        <div className="w-px h-10 bg-[#ccc]" style={{ animation: "scrollLine 1.5s ease-in-out infinite" }} />
       </div>
     </section>
   );
