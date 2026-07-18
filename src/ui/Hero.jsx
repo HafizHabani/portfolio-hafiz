@@ -27,7 +27,7 @@ export default function Hero({ data, scrollY }) {
       <div className="absolute inset-x-0 top-[30%] h-px bg-[#f0f0ee] z-0" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-3xl pb-16">
+      <div className="relative z-10 max-w-3xl pt-14 pb-8">
 
         {/* Role label */}
         <div
@@ -103,7 +103,7 @@ export default function Hero({ data, scrollY }) {
         style={{ animation: "fadeUp 1s 1.2s ease both" }}
       >
         <span className="font-mono text-[9px] tracking-[0.4em] text-[#ccc]">SCROLL</span>
-        <div className="w-px h-10 bg-[#ccc]" style={{ animation: "scrollLine 1.5s ease-in-out infinite" }} />
+        <div className="w-px bg-[#ccc]" style={{ animation: "scrollLine 1.5s ease-in-out infinite" }} />
       </div>
     </section>
   );

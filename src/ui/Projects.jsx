@@ -4,7 +4,7 @@ import Projectcard from "../function/Projectcard";
 
 export default function Projects({ projects }) {
   return (
-    <section id="projects" className="px-6 md:px-12 py-24 md:py-32">
+    <section id="projects" className="px-6 md:px-12 py-10 md:py-14">
       <div className="max-w-[1100px] mx-auto">
 
         <Animblock>

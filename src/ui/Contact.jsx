@@ -12,7 +12,7 @@ export default function Contact({ data }) {
   return (
     <section
       id="contact"
-      className="px-6 md:px-12 py-24 md:py-32 bg-[#111] relative overflow-hidden"
+      className="px-6 md:px-12 py-10 md:py-14 bg-[#111] relative overflow-hidden"
     >
       {/* Kanji watermark */}
       <div

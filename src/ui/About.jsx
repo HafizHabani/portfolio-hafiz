@@ -5,7 +5,7 @@ export default function About({ data }) {
   return (
     <section
       id="about"
-      className="px-6 md:px-12 py-24 md:py-32 border-t border-[#e8e8e8] relative"
+      className="px-6 md:px-12 py-10 md:py-14 border-t border-[#e8e8e8] relative"
     >
       <div className="max-w-[1100px] mx-auto">
 
