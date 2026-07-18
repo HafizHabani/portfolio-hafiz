@@ -14,7 +14,6 @@ export default function Hero({ data, scrollY }) {
       <div
         className="absolute right-0 md:right-4 select-none pointer-events-none z-0"
         style={{
-          top: "50%",
           fontSize: "clamp(120px, 22vw, 320px)",
           color: "rgba(0,0,0,0.06)",
           fontFamily: "'Noto Serif JP', serif",
@@ -28,7 +27,7 @@ export default function Hero({ data, scrollY }) {
       <div className="absolute inset-x-0 top-[30%] h-px bg-[#f0f0ee] z-0" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-3xl pt-24 pb-16">
+      <div className="relative z-10 max-w-3xl pb-16">
 
         {/* Role label */}
         <div
