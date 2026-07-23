@@ -52,12 +52,12 @@ const data = {
       desc: "A canteen management platform designed to streamline food ordering and administrative operations. The system includes online ordering, inventory management, promotional campaigns, sales reporting, and digital payment management to improve operational efficiency and reduce customer waiting times.",
       tags: ["JavaScript", "React.js", "HTML", "Tailwind CSS"],
       year: "2024",
-      link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.Malang-Be.git"
+      link: "https://github.com/HafizHabani/Massive_Project_Foodlink-Fe.git"
     },
     {
       id:   "04",
       name: "Project Foodlink BE",
-      desc: "Developed the backend of a canteen management platform, building RESTful APIs, business logic, and database architecture to support online ordering, inventory management, promotional campaigns, sales reporting, and digital payment processing.",
+      desc: "Developed the backend of a canteen management platform, building RESTful APIs, business logic, and database architecture to support online ordering, inventory management, promotional campaigns, sales reporting, and digital payment processing. Worked with the frontend team to integrate APIs and support application features.",
       tags: ["Laravel", "REST API", "MySQL", "Role Management"],
       year: "2023",
       link: "https://github.com/HafizHabani/Massive_Project_Foodlink-Be.git"
@@ -77,51 +77,56 @@ const data = {
       tags: ["PHP", "HTML", "CSS", "Javascript"],
       year: "2023",
       link: "https://github.com/HafizHabani/Raw_Project_SISKAMLING.git"
-    },
-    {
-      id:   "07",
-      name: "JaRang",
-      desc: "A web-based logistics administration system designed to streamline shipment management through comprehensive CRUD operations, package tracking, shipping cost management, and customer data administration. Built with a focus on efficiency, accuracy, and a user-friendly administrative workflow.",
-      tags: ["PHP", "JavaScript", "CSS", "MySQL"],
-      year: "2024",
-      link: "https://github.com/HafizHabani/Raw_Project_JaRang.git"
-    },
-    {
-      id: "08",
-      name: "SISKAMLING",
-      desc: "A web-based neighborhood security management system designed to improve coordination between administrators, security officers, and residents. The platform provides patrol scheduling, incident reporting, attendance tracking, and administrative tools to streamline community security operations.",
-      tags: ["PHP", "HTML", "CSS", "Javascript"],
-      year: "2023",
-      link: "https://github.com/HafizHabani/Raw_Project_SISKAMLING.git"
     }
   ],
 
+  // ============================================================
+  //  Experience — diambil dari CV kamu (CV_Indonesia.pdf)
+  // ============================================================
   experience: [
     {
-      year:    "2024 — kini",
-      role:    "Senior IT Engineer",
-      company: "Orbital Systems",
-      desc:    "Lead development tim 5 orang, arsitektur microservices.",
+      year:    "Agu 2025 — Sekarang",
+      role:    "IT Staff",
+      company: "Tata Optima Property Palangkaraya",
+      desc:    "Mengelola dan memelihara 100+ perangkat TI (komputer, laptop, printer, CCTV, NVR, NAS, Access Point). Instalasi, konfigurasi, dan troubleshooting jaringan LAN, Fiber Optic, MikroTik, IP Phone, serta CCTV. Berpartisipasi dalam 20+ proyek instalasi/migrasi infrastruktur TI dan memasang 300+ titik CCTV.",
     },
     {
-      year:    "2022 — 2024",
-      role:    "Full-Stack Developer",
-      company: "Mizu Studio",
-      desc:    "Membangun platform e-commerce dari nol, 10k+ pengguna.",
+      year:    "Feb 2024 — Apr 2024",
+      role:    "Frontend Developer / Programmer",
+      company: "Dinas Komunikasi dan Informatika Kabupaten Malang",
+      desc:    "Front-end Developer untuk aplikasi web pemerintahan menggunakan React.js, membangun 10+ halaman yang responsif dan interaktif, serta melakukan pengujian UI dan fungsionalitas aplikasi.",
     },
     {
-      year:    "2021 — 2022",
-      role:    "Junior Developer",
-      company: "Hoshi Digital",
-      desc:    "Frontend React, integrasi REST API, optimasi performa.",
+      year:    "Agu 2023 — Des 2023",
+      role:    "Web Development Mentee & Tester",
+      company: "Infinite Learning Indonesia",
+      desc:    "Berkontribusi dalam 3+ proyek pengembangan aplikasi (riset, perancangan UI/UX, implementasi UI web) dan menguji 20+ halaman/komponen untuk memastikan responsivitas dan fungsionalitas.",
+    },
+    {
+      year:    "Sep 2023 — Mei 2024",
+      role:    "Frontend Developer / Programmer",
+      company: "Project Website Development",
+      desc:    "Mengembangkan 5+ aplikasi web dengan React.js, JavaScript, HTML, CSS, dan Tailwind CSS. Mengintegrasikan 20+ endpoint REST API dengan backend Laravel serta mengelola source code dengan Git.",
+    },
+    {
+      year:    "Agu 2021 — Okt 2023",
+      role:    "Frontend Developer / Programmer",
+      company: "Project Mobile Application Development",
+      desc:    "Mengembangkan 3+ aplikasi Android menggunakan Flutter, Dart, Java, dan Kotlin. Mengintegrasikan Firebase Authentication dan Cloud Firestore untuk autentikasi dan sinkronisasi data real-time.",
+    },
+    {
+      year:    "2018 — Sekarang",
+      role:    "Teknisi Perangkat Keras/Lunak Komputer",
+      company: "Self-employed",
+      desc:    "Teknisi komputer independen dengan pengalaman 8+ tahun menangani 400+ perangkat komputer dan laptop: diagnosis, perbaikan, instalasi OS, upgrade hardware, optimasi performa, pemulihan data, serta konfigurasi jaringan dasar.",
     },
   ],
 
   contact: {
-    email:    "riku@tanaka.dev",
-    github:   "github.com/rikutanaka",
-    linkedin: "linkedin.com/in/rikutanaka",
-    location: "Indonesia",
+    email:    "hafizhbniwork@gmail.com",
+    github:   "github.com/HafizHabani",
+    linkedin: "linkedin.com/in/hafiz-habani",
+    location: "Palangkaraya, Kalimantan Tengah",
   },
 };
 

@@ -3,8 +3,8 @@ import Animblock from "../function/Animblock";
 
 export default function Contact({ data }) {
   const links = [
-    { key: "Email",    val: data.contact.email,    href: `mailto:${data.contact.email}` },
-    { key: "GitHub",   val: data.contact.github,   href: `https://${data.contact.github}` },
+    { key: "Email", val: data.contact.email, href: `mailto:${data.contact.email}` },
+    { key: "GitHub", val: data.contact.github, href: `https://${data.contact.github}` },
     { key: "LinkedIn", val: data.contact.linkedin, href: `https://${data.contact.linkedin}` },
     { key: "Location", val: data.contact.location, href: null },
   ];
@@ -39,13 +39,23 @@ export default function Contact({ data }) {
           {/* CTA button */}
           <Animblock delay={0.15}>
             <a
-              href={`mailto:${data.contact.email}`}
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=hafizhbniwork@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block font-mono text-[11px] tracking-[0.25em] uppercase text-white border border-[#333] px-8 py-4 transition-all duration-300 hover:bg-white hover:text-[#111] mb-12"
               style={{ cursor: "none" }}
             >
-              Send a Message →
+              Send Me a Email →
             </a>
-
+            <a
+              href="https://wa.me/6285173077553"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-mono text-[11px] tracking-[0.25em] uppercase text-white border border-[#333] px-8 py-4 transition-all duration-300 hover:bg-white hover:text-[#111] mb-12"
+              style={{ cursor: "none" }}
+            >
+              Chat Me on WhatsApp →
+            </a>
             {/* Social links */}
             <div className="flex flex-col gap-1">
               {links.map(({ key, val, href }) => (
