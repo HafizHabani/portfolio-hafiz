@@ -39,11 +39,9 @@ export default function Contact({ data }) {
           {/* CTA button */}
           <Animblock delay={0.15}>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=hafizhbniwork@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block font-mono text-[11px] tracking-[0.25em] uppercase text-white border border-[#333] px-8 py-4 transition-all duration-300 hover:bg-white hover:text-[#111] mb-12"
-              style={{ cursor: "none" }}
+               href="mailto:hafizhbniwork@gmail.com"
+  className="inline-block font-mono text-[11px] tracking-[0.25em] uppercase text-white border border-[#333] px-8 py-4 transition-all duration-300 hover:bg-white hover:text-[#111] mb-12"
+  style={{ cursor: "none" }}
             >
               Send Me a Email →
             </a>
