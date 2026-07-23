@@ -8,7 +8,7 @@ export default function Hero({ data, scrollY }) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden px-6 md:px-12"
+      className="max-w-[1100px] mx-auto relative min-h-screen flex items-center overflow-hidden px-6 md:px-12"
     >
       {/* Kanji watermark */}
       <div
@@ -31,7 +31,7 @@ export default function Hero({ data, scrollY }) {
 
         {/* Role label */}
         <div
-          className="font-mono text-[11px] tracking-[0.4em] text-[#888] mb-6"
+          className="font-mono text-[16px] tracking-[0.4em] text-[#888] mb-6"
           style={{ animation: "fadeUp 0.8s 0.2s ease both" }}
         >
           {data.role.toUpperCase()} &nbsp;/&nbsp; PORTFOLIO
@@ -52,49 +52,35 @@ export default function Hero({ data, scrollY }) {
 
         {/* Tagline */}
         <div
-          className="font-mono text-[13px] text-[#888] tracking-[0.05em] mt-4"
+          className="font-mono text-[20px] text-[#888] tracking-[0.05em] mt-4"
           style={{ animation: "fadeUp 0.8s 0.6s ease both" }}
         >
           — {data.tagline}
         </div>
 
         {/* Stats row — max 4, responsive */}
+        {/* Stats */}
         <div
-          className="flex flex-wrap gap-0 mt-12 border-t border-[#e8e8e8]"
+          className="flex gap-y-8 mt-12 border-t border-[#e8e8e8]"
           style={{ animation: "fadeUp 0.8s 0.8s ease both" }}
         >
-          {visibleStats.map((s, i) => (
+          {data.stats.map((s, i) => (
             <div
               key={s.label}
               className="pt-6 pr-8 mr-8"
               style={{
-                borderRight: i < visibleStats.length - 1 ? "1px solid #e8e8e8" : "none",
+                borderRight: i < data.stats.length - 1 ? "1px solid #e8e8e8" : "none",
               }}
             >
               <div className="font-serif font-light text-[28px] md:text-[32px] tracking-[-0.03em] leading-none">
                 {s.value}
               </div>
-              <div className="font-mono text-[9px] tracking-[0.3em] text-[#aaa] mt-2 uppercase">
+              <div className="font-mono text-[14px] tracking-[0.3em] text-[#aaa] mt-2 uppercase">
                 {s.label}
               </div>
             </div>
           ))}
         </div>
-
-        {/* More stats — collapsed on second row */}
-        {data.stats.length > 4 && (
-          <div
-            className="flex flex-wrap gap-6 mt-6 pt-6 border-t border-[#f0f0ee]"
-            style={{ animation: "fadeUp 0.8s 1s ease both" }}
-          >
-            {data.stats.slice(4).map(s => (
-              <div key={s.label} className="flex items-baseline gap-2">
-                <span className="font-serif font-light text-[18px] text-[#111]">{s.value}</span>
-                <span className="font-mono text-[9px] tracking-[0.2em] text-[#bbb] uppercase">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Scroll indicator */}
