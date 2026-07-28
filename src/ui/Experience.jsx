@@ -6,18 +6,28 @@ export default function Experience({ experience }) {
   return (
     <section
       id="experience"
-      className="px-6 md:px-12 py-10 md:py-14 bg-[#fafaf8] border-t border-[#e8e8e8]"
+      className="px-5 sm:px-6 md:px-12 py-10 md:py-14 bg-[#fafaf8] border-t border-[#e8e8e8]"
     >
       <div className="max-w-[1100px] mx-auto">
 
         <Animblock>
-          <div className="font-mono text-[10px] tracking-[0.5em] text-[#bbb] mb-8 uppercase">
+          {/* Section label */}
+          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.3em] sm:tracking-[0.4em] text-[#999] mb-6 md:mb-8 uppercase">
             04 &nbsp;/&nbsp; Experience
           </div>
-          <h2 className="font-serif font-light text-[36px] md:text-[42px] tracking-[-0.03em] mb-3 leading-[1.15]">
+
+          {/* Heading */}
+          <h2
+            className="font-serif font-light leading-[1.15] tracking-[-0.02em] mb-3"
+            style={{
+              fontSize: "clamp(32px, 6vw, 46px)",
+            }}
+          >
             Work<br />Experience.
           </h2>
-          <p className="font-mono text-[12px] text-[#888] mb-14 max-w-lg leading-[1.8]">
+
+          {/* Description */}
+          <p className="font-mono text-[15px] md:text-[16px] text-[#666] tracking-[0.01em] mb-10 md:mb-14 max-w-lg leading-[1.8]">
             Roles and responsibilities across IT support, infrastructure, and development.
           </p>
         </Animblock>
