@@ -1,15 +1,17 @@
 // src/ui/Hero.jsx
 import Animblock from "../function/Animblock";
+import meImg from "../assets/png/Me.png";
 
 export default function Hero({ data, scrollY }) {
   const stats = data.stats;
+  const featuredStat = stats[0];
 
   return (
     <section
       id="hero"
       className="relative min-h-[100svh] flex items-center overflow-hidden"
     >
-      {/* Animated black & white gradient background — now truly full width, section itself is full width */}
+      {/* Animated black & white gradient background */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
@@ -34,53 +36,139 @@ export default function Hero({ data, scrollY }) {
         飛
       </div>
 
+      {/* Content wrapper */}
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-5 sm:px-6 md:px-12 pt-24 pb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-      {/* Content wrapper — constrained to 1100px, centered */}
-      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-5 sm:px-6 md:px-12 pt-14 pb-8">
+          {/* Left — text content */}
+          <div>
+            {/* Role label */}
+            <div
+              className="font-mono text-[12px] sm:text-[14px] tracking-[0.2em] sm:tracking-[0.3em] text-[#888] mb-5 break-words"
+              style={{ animation: "fadeUp 0.8s 0.2s ease both" }}
+            >
+              {data.role.toUpperCase()} &nbsp;/&nbsp; PORTFOLIO
+            </div>
 
-        {/* Text block stays narrower for readability */}
-        <div className="max-w-3xl">
-          {/* Role label */}
-          <div
-            className="font-mono text-[12px] sm:text-[14px] md:text-[16px] tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] text-[#888] mb-5 md:mb-6 break-words"
-            style={{ animation: "fadeUp 0.8s 0.2s ease both" }}
-          >
-            {data.role.toUpperCase()} &nbsp;/&nbsp; PORTFOLIO
+            {/* Name */}
+            <h1
+              className="font-serif font-light leading-[1.05] tracking-[-0.02em] sm:tracking-[-0.03em] mb-4"
+              style={{
+                fontSize: "clamp(34px, 8vw, 64px)",
+                animation: "fadeUp 0.8s 0.4s ease both",
+              }}
+            >
+              {data.name.split(" ").map((w, i) => (
+                <span key={i} className="block">
+                  {w}
+                </span>
+              ))}
+            </h1>
+
+            {/* Tagline */}
+            <div
+              className="font-mono text-[15px] sm:text-[17px] text-[#888] tracking-[0.03em] mt-4 mb-8 max-w-md leading-[1.8]"
+              style={{ animation: "fadeUp 0.8s 0.6s ease both" }}
+            >
+              — {data.tagline}
+            </div>
+
+            {/* Buttons */}
+            <div
+              className="flex flex-wrap gap-4"
+              style={{ animation: "fadeUp 0.8s 0.7s ease both" }}
+            >
+              <a 
+                href="src/assets/pdf/CV Indonesia.pdf"
+                download
+                className="inline-block font-mono text-[12px] sm:text-[13px] tracking-[0.2em] uppercase text-white bg-[#111] border border-[#111] px-7 py-3.5 transition-all duration-300 hover:bg-white hover:text-[#111]"
+              >
+                Download CV ↓
+              </a>
+              <a 
+                href="#contact"
+                className="inline-block font-mono text-[12px] sm:text-[13px] tracking-[0.2em] uppercase text-[#111] border border-[#111] px-7 py-3.5 transition-all duration-300 hover:bg-[#111] hover:text-white"
+              >
+                Contact Me
+              </a>
+            </div>
+
+            {/* Featured stat, mobile-only quick preview */}
+            {featuredStat && (
+              <div
+                className="lg:hidden mt-10 pt-6 border-t border-[#e0e0e0]"
+                style={{ animation: "fadeUp 0.8s 0.8s ease both" }}
+              >
+                <div className="font-serif font-light text-[28px] tracking-[-0.02em] leading-none">
+                  {featuredStat.value}
+                </div>
+                <div className="font-mono text-[11px] tracking-[0.2em] text-[#aaa] mt-2 uppercase">
+                  {featuredStat.label}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Name */}
-          <h1
-            className="font-serif font-light leading-[1.05] tracking-[-0.02em] sm:tracking-[-0.03em] mb-4"
-            style={{
-              fontSize: "clamp(34px, 12vw, 88px)",
-              animation: "fadeUp 0.8s 0.4s ease both",
-            }}
-          >
-            {data.name.split(" ").map((w, i) => (
-              <span key={i} className="block">
-                {w}
-              </span>
-            ))}
-          </h1>
-
-          {/* Tagline */}
+          {/* Right — photo with decorative elements */}
           <div
-            className="font-mono text-[15px] sm:text-[17px] md:text-[20px] text-[#888] tracking-[0.03em] sm:tracking-[0.05em] mt-4"
-            style={{ animation: "fadeUp 0.8s 0.6s ease both" }}
+            className="relative flex justify-center lg:justify-end"
+            style={{ animation: "fadeUp 0.8s 0.5s ease both" }}
           >
-            — {data.tagline}
+            {/* Decorative circle behind photo */}
+            <div
+              className="absolute rounded-full bg-[#e2e2e2]"
+              style={{
+                width: "min(80%, 380px)",
+                height: "min(80%, 380px)",
+                top: "5%",
+                right: "5%",
+              }}
+            />
+
+            {/* Dot grid pattern */}
+            <div
+              className="absolute -bottom-4 -left-2 grid grid-cols-6 gap-1.5 pointer-events-none"
+              aria-hidden="true"
+            >
+              {Array.from({ length: 24 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="w-1 h-1 rounded-full bg-[#c9c9c9]"
+                />
+              ))}
+            </div>
+
+            {/* Photo */}
+            <img
+              src={meImg}
+              alt={data.name}
+              className="relative z-10 w-[240px] sm:w-[300px] md:w-[340px] h-auto -bottom-8 object-cover select-none"
+              style={{ filter: "grayscale(100%)" }}
+            />
+
+            {/* Floating featured stat card — desktop only */}
+            {featuredStat && (
+              <div className="hidden lg:block absolute z-20 bottom-6 -right-4 bg-white shadow-lg px-6 py-5 border border-[#eee]">
+                <div className="font-serif font-light text-[28px] tracking-[-0.02em] leading-none">
+                  {featuredStat.value}
+                </div>
+                <div className="font-mono text-[11px] tracking-[0.15em] text-[#999] mt-1 uppercase">
+                  {featuredStat.label}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Stats — spans full width of the content wrapper */}
+        {/* Full stats row */}
         <div
-          className="grid mt-10 md:mt-12 "
+          className="grid mt-16 md:mt-20 border-t border-[#e8e8e8] pt-2"
           style={{
             gridTemplateColumns: `repeat(auto-fit, minmax(110px, 1fr))`,
-            animation: "fadeUp 0.8s 0.8s ease both",
+            animation: "fadeUp 0.8s 0.9s ease both",
           }}
         >
-          {stats.map((s, i) => (
+          {stats.map((s) => (
             <div
               key={s.label}
               className="pt-5 sm:pt-6 pl-4 sm:pl-6 md:pl-8 pr-4 sm:pr-6 md:pr-8"
@@ -108,7 +196,7 @@ export default function Hero({ data, scrollY }) {
         />
       </div>
 
-      {/* Keyframes for the gradient animation */}
+      {/* Keyframes */}
       <style>{`
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
