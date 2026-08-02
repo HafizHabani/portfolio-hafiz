@@ -7,8 +7,19 @@ export default function Hero({ data, scrollY }) {
   return (
     <section
       id="hero"
-      className="max-w-[1100px] mx-auto relative min-h-[100svh] flex items-center overflow-hidden px-5 sm:px-6 md:px-12"
+      className="relative min-h-[100svh] flex items-center overflow-hidden"
     >
+      {/* Animated black & white gradient background — now truly full width, section itself is full width */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(120deg, #ffffff 0%, #e8e8e8 20%, #ffffff 40%, #d4d4d4 60%, #ffffff 80%, #ececec 100%)",
+          backgroundSize: "400% 400%",
+          animation: "gradientShift 12s ease infinite",
+        }}
+      />
+
       {/* Kanji watermark */}
       <div
         className="absolute right-0 md:right-4 select-none pointer-events-none z-0"
@@ -23,12 +34,9 @@ export default function Hero({ data, scrollY }) {
         飛
       </div>
 
-      {/* Decorative lines */}
-      <div className="absolute inset-x-0 top-1/2 h-px bg-[#e8e8e8] z-0" />
-      <div className="absolute inset-x-0 top-[30%] h-px bg-[#f0f0ee] z-0" />
 
-      {/* Content — full width of section now */}
-      <div className="relative z-10 w-full pt-14 pb-8">
+      {/* Content wrapper — constrained to 1100px, centered */}
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-5 sm:px-6 md:px-12 pt-14 pb-8">
 
         {/* Text block stays narrower for readability */}
         <div className="max-w-3xl">
@@ -64,12 +72,11 @@ export default function Hero({ data, scrollY }) {
           </div>
         </div>
 
-        {/* Stats — spans full width of the section */}
+        {/* Stats — spans full width of the content wrapper */}
         <div
-          className="grid mt-10 mx-auto md:mt-12 border-t border-[#e8e8e8]"
+          className="grid mt-10 md:mt-12 "
           style={{
             gridTemplateColumns: `repeat(auto-fit, minmax(110px, 1fr))`,
-            
             animation: "fadeUp 0.8s 0.8s ease both",
           }}
         >
@@ -77,9 +84,6 @@ export default function Hero({ data, scrollY }) {
             <div
               key={s.label}
               className="pt-5 sm:pt-6 pl-4 sm:pl-6 md:pl-8 pr-4 sm:pr-6 md:pr-8"
-              style={{
-                borderRightWidth: i === stats.length - 1 ? 0 : 1,
-              }}
             >
               <div className="font-serif font-light text-[22px] sm:text-[26px] md:text-[32px] tracking-[-0.02em] sm:tracking-[-0.03em] leading-none">
                 {s.value}
@@ -103,6 +107,15 @@ export default function Hero({ data, scrollY }) {
           style={{ animation: "scrollLine 1.5s ease-in-out infinite" }}
         />
       </div>
+
+      {/* Keyframes for the gradient animation */}
+      <style>{`
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
     </section>
   );
 }
