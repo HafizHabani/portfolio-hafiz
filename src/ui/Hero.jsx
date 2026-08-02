@@ -44,7 +44,7 @@ export default function Hero({ data, scrollY }) {
           <div>
             {/* Role label */}
             <div
-              className="font-mono text-[12px] sm:text-[14px] tracking-[0.2em] sm:tracking-[0.3em] text-[#888] mb-5 break-words"
+              className="font-mono text-[12px] sm:text-[14px] tracking-[0.2em] sm:tracking-[0.3em] text-[#525357] mb-5 break-words"
               style={{ animation: "fadeUp 0.8s 0.2s ease both" }}
             >
               {data.role.toUpperCase()} &nbsp;/&nbsp; PORTFOLIO
@@ -67,7 +67,7 @@ export default function Hero({ data, scrollY }) {
 
             {/* Tagline */}
             <div
-              className="font-mono text-[15px] sm:text-[17px] text-[#888] tracking-[0.03em] mt-4 mb-8 max-w-md leading-[1.8]"
+              className="font-mono text-[15px] sm:text-[17px] text-[#525357] tracking-[0.03em] mt-4 mb-8 max-w-md leading-[1.8]"
               style={{ animation: "fadeUp 0.8s 0.6s ease both" }}
             >
               — {data.tagline}
@@ -102,7 +102,7 @@ export default function Hero({ data, scrollY }) {
                 <div className="font-serif font-light text-[28px] tracking-[-0.02em] leading-none">
                   {featuredStat.value}
                 </div>
-                <div className="font-mono text-[11px] tracking-[0.2em] text-[#aaa] mt-2 uppercase">
+                <div className="font-mono text-[11px] tracking-[0.2em] text-[#525357] mt-2 uppercase">
                   {featuredStat.label}
                 </div>
               </div>
@@ -176,7 +176,7 @@ export default function Hero({ data, scrollY }) {
               <div className="font-serif font-light text-[22px] sm:text-[26px] md:text-[32px] tracking-[-0.02em] sm:tracking-[-0.03em] leading-none">
                 {s.value}
               </div>
-              <div className="font-mono text-[10px] sm:text-[12px] md:text-[14px] tracking-[0.15em] sm:tracking-[0.3em] text-[#aaa] mt-2 uppercase">
+              <div className="font-mono text-[10px] sm:text-[12px] md:text-[14px] tracking-[0.15em] sm:tracking-[0.3em] text-[#525357] mt-2 uppercase">
                 {s.label}
               </div>
             </div>
