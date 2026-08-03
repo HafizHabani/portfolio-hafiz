@@ -11,7 +11,7 @@ export default function About({ data }) {
 
         {/* Section label */}
         <Animblock>
-          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#bbb] mb-10 uppercase">
+          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#525357] mb-10 uppercase">
             01 &nbsp;/&nbsp; About
           </div>
         </Animblock>
@@ -45,7 +45,7 @@ export default function About({ data }) {
             <div className="border border-[#e8e8e8] p-8 md:p-12 relative h-full flex flex-col justify-center">
 
               {/* Card label */}
-              <div className="absolute -top-px right-10 bg-[#fafaf8] px-3 font-mono text-[11px] tracking-[0.2em] text-[#bbb] uppercase">
+              <div className="absolute -top-px right-10 bg-[#fafaf8] px-3 font-mono text-[11px] tracking-[0.2em] text-[#525357] uppercase">
                 Identity
               </div>
 
@@ -58,7 +58,7 @@ export default function About({ data }) {
                 ["Email",    data.contact.email],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between items-start py-4 border-b border-[#f0f0ee] last:border-0 gap-4">
-                  <span className="font-mono text-[12px] tracking-[0.15em] text-[#999] uppercase shrink-0">
+                  <span className="font-mono text-[12px] tracking-[0.15em] ttext-[#525357] uppercase shrink-0">
                     {k}
                   </span>
                   <span className="font-mono text-[14px] text-[#111] tracking-[0.01em] text-right break-all">

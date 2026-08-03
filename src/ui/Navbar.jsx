@@ -62,7 +62,7 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
                 text-white/50 hover:text-white
                 ${floating
                   ? "text-sm px-4 py-2 rounded-full hover:bg-white/10"
-                  : "text-xl px-3"
+                  : "text-xl px-5"
                 }
               `}
             >

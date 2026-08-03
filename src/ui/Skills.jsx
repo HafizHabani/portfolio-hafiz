@@ -17,13 +17,13 @@ export default function Skills({ skills }) {
       <div className="max-w-[1100px] mx-auto relative z-10">
 
         <Animblock>
-          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#555] mb-8 uppercase">
+          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#BFBFBF] mb-8 uppercase">
             02 &nbsp;/&nbsp; Skills
           </div>
           <h2 className="font-serif font-light text-[38px] md:text-[46px] tracking-[-0.02em] text-white mb-4 leading-[1.15]">
             Technical<br />Stack.
           </h2>
-          <p className="font-mono text-[15px] md:text-[16px] text-[#666] mb-14 max-w-md leading-[1.8]">
+          <p className="font-mono text-[15px] md:text-[16px] text-[#BFBFBF] mb-14 max-w-md leading-[1.8]">
             Tools and technologies I use to build, configure, and maintain systems.
           </p>
         </Animblock>

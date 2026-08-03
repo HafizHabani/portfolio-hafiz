@@ -32,7 +32,7 @@ export default function Skillbar({ skill, delay }) {
         {skill.items.map(item => (
           <span
             key={item}
-            className="font-mono text-[10px] tracking-[0.05em] text-[#555] border border-[#2a2a2a] px-2.5 py-1 hover:text-[#aaa] hover:border-[#444] transition-colors duration-200"
+            className="font-mono text-[10px] tracking-[0.05em] text-[#BFBFBF] border border-[#2a2a2a] px-2.5 py-1 hover:text-[#aaa] hover:border-[#444] transition-colors duration-200"
           >
             {item}
           </span>
