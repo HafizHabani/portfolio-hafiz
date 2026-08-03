@@ -11,7 +11,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Balik warna teks: putih (di atas bg gelap) → gelap (di atas dashboard putih) */
+@keyframes colorFlipToDark {
+  to { color: #111111; }
+}
+@keyframes progWrapFlip {
+  to { background: rgba(0,0,0,0.1); }
+}
+@keyframes progFillFlip {
+  to { background: #111111; }
+}
 
+@keyframes blinkThenFadeOut {
+  0%, 82%   { opacity: 0.2; }
+  10%, 74%  { opacity: 0.5; }
+  20%, 66%  { opacity: 0.2; }
+  30%, 58%  { opacity: 0.5; }
+  40%, 50%  { opacity: 0.2; }
+  100%      { opacity: 0; }
+}
 /* ============================================================
    TOKENS
    ============================================================ */
