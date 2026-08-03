@@ -1,7 +1,7 @@
 // src/components/Navbar.jsx
 import { useState, useEffect } from "react";
 
-export default function Navbar({ kanji, sections, activeNav, scrollY, onNav }) {
+export default function Navbar({ kanji, sections, scrollY, onNav }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -16,16 +16,33 @@ export default function Navbar({ kanji, sections, activeNav, scrollY, onNav }) {
     setMenuOpen(false);
   };
 
+  const floating = scrollY > 40;
+
   return (
-    <nav className={`
-      fixed top-0 left-0 right-0 z-50
-      bg-black/95
-      transition-all duration-400 ease-in-out
-      ${scrollY > 40 || menuOpen ? "border-b border-white/10 backdrop-blur-md" : ""}
-    `}>
+    <nav
+      className={`
+        fixed z-50
+        transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+        bg-black/95
+        ${menuOpen ? "border-b border-white/10 backdrop-blur-md" : ""}
+        ${floating
+          ? "top-4 left-1/2 -translate-x-1/2 w-[92%] md:w-fit rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl"
+          : "top-0 left-0 right-0 w-full rounded-none"
+        }
+      `}
+    >
 
       {/* ── Top bar ── */}
-      <div className="flex items-center justify-between px-6 py-4 md:px-12 md:py-[18px]">
+      <div
+        className={`
+          flex items-center justify-between
+          transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
+          ${floating
+            ? "px-5 py-2.5 md:gap-8"
+            : "px-6 py-4 md:px-12 md:py-[18px]"
+          }
+        `}
+      >
 
         {/* Kanji logo */}
         <div className="font-mono text-xl tracking-[0.25em] text-white">
@@ -33,16 +50,20 @@ export default function Navbar({ kanji, sections, activeNav, scrollY, onNav }) {
         </div>
 
         {/* Desktop links */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex gap-1">
           {sections.map(s => (
             <button
               key={s}
               onClick={() => handleNav(s)}
               className={`
-                font-mono text-xl tracking-[0.2em] uppercase
-                transition-colors duration-300 cursor-pointer
-                bg-transparent border-none p-0
-                ${activeNav === s ? "text-white" : "text-white/40 hover:text-white/70"}
+                font-mono uppercase tracking-[0.2em]
+                transition-all duration-300 cursor-pointer
+                bg-transparent border-none
+                text-white/50 hover:text-white
+                ${floating
+                  ? "text-sm px-4 py-2 rounded-full hover:bg-white/10"
+                  : "text-xl px-3"
+                }
               `}
             >
               {s}
@@ -89,8 +110,8 @@ export default function Navbar({ kanji, sections, activeNav, scrollY, onNav }) {
               px-6 py-4 bg-transparent border-none cursor-pointer
               font-mono text-[10px] tracking-[0.2em] uppercase text-left
               transition-colors duration-200
+              text-white/40 hover:text-white/60
               ${i < sections.length - 1 ? "border-b border-white/5" : ""}
-              ${activeNav === s ? "text-white" : "text-white/40 hover:text-white/60"}
             `}
             style={{
               opacity:          menuOpen ? 1 : 0,
@@ -102,10 +123,7 @@ export default function Navbar({ kanji, sections, activeNav, scrollY, onNav }) {
             }}
           >
             <span>{s}</span>
-            <span className={`
-              text-[9px] tracking-wide font-mono
-              ${activeNav === s ? "text-white/50" : "text-white/20"}
-            `}>
+            <span className="text-[9px] tracking-wide font-mono text-white/20">
               {String(i + 1).padStart(2, "0")}
             </span>
           </button>
