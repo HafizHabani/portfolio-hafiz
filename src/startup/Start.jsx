@@ -7,8 +7,8 @@ export default function Start() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // total sekuens ~4.8s (tebasan sekarang 2 detik), redirect setelah dashboard terungkap
-    const timer = setTimeout(() => navigate("/Dashboard"), 4200);
+    // total sekuens 3s, tebasan 1 detik
+    const timer = setTimeout(() => navigate("/Dashboard"), 3500);
     return () => clearTimeout(timer);
   }, [navigate]);
 
@@ -17,7 +17,7 @@ export default function Start() {
     const dist = 50 + ((i * 37) % 60);
     const dx = Math.cos((angle * Math.PI) / 180) * dist;
     const dy = Math.sin((angle * Math.PI) / 180) * dist;
-    return { id: i, dx, dy, delay: 3.3 + i * 0.02 };
+    return { id: i, dx, dy, delay: 1.85 + i * 0.02 };
   });
 
   return (
@@ -58,8 +58,6 @@ export default function Start() {
         </div>
         <div style={s.mainRole}>{data.role}</div>
 
-        
-
         {/* Wrapper tetap, dua teks status ditumpuk absolute di dalamnya — tidak saling ganggu posisi */}
         <div style={s.statusWrap}>
           <div style={s.statusText}>— ENTERING SYSTEM —</div>
@@ -67,10 +65,10 @@ export default function Start() {
         </div>
       </div>
 
-      {/* ── Katana slash — sekarang berlangsung 2 detik ── */}
+      {/* ── Katana slash — sekarang berlangsung 1 detik ── */}
       <div style={s.bladeTrack}>
-        <div style={{ ...s.bladeGlow, filter: "blur(18px)", opacity: 0.22, width: 40, animation: "bladeSweep 2s cubic-bezier(0.45,0,0.4,1) 1.3s forwards" }} />
-        <div style={{ ...s.bladeGlow, filter: "blur(9px)", opacity: 0.35, width: 16, animation: "bladeSweep 2s cubic-bezier(0.45,0,0.4,1) 1.34s forwards" }} />
+        <div style={{ ...s.bladeGlow, filter: "blur(18px)", opacity: 0.22, width: 40, animation: "bladeSweep 1s cubic-bezier(0.45,0,0.4,1) 0.82s forwards" }} />
+        <div style={{ ...s.bladeGlow, filter: "blur(9px)", opacity: 0.35, width: 16, animation: "bladeSweep 1s cubic-bezier(0.45,0,0.4,1) 0.86s forwards" }} />
         <div style={s.blade} />
       </div>
 
@@ -96,8 +94,8 @@ export default function Start() {
       </div>
 
       {/* Split halves */}
-      <div style={{ ...s.half, clipPath: "polygon(0 0, 58% 0, 42% 100%, 0% 100%)", animation: "slideLeftCut 0.85s cubic-bezier(0.76,0,0.24,1) 3.45s forwards" }} />
-      <div style={{ ...s.half, clipPath: "polygon(58% 0, 100% 0, 100% 100%, 42% 100%)", animation: "slideRightCut 0.85s cubic-bezier(0.76,0,0.24,1) 3.45s forwards" }} />
+      <div style={{ ...s.half, clipPath: "polygon(0 0, 58% 0, 42% 100%, 0% 100%)", animation: "slideLeftCut 0.85s cubic-bezier(0.76,0,0.24,1) 1.95s forwards" }} />
+      <div style={{ ...s.half, clipPath: "polygon(58% 0, 100% 0, 100% 100%, 42% 100%)", animation: "slideRightCut 0.85s cubic-bezier(0.76,0,0.24,1) 1.95s forwards" }} />
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&display=swap');
@@ -115,9 +113,6 @@ export default function Start() {
           from { opacity: 0; transform: translateY(12px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        @keyframes progFill {
-          to { width: 100%; }
-        }
         @keyframes revealDash {
           to { opacity: 1; }
         }
@@ -125,12 +120,20 @@ export default function Start() {
           0%, 100% { opacity: 0.2; }
           50%       { opacity: 0.5; }
         }
+        @keyframes blinkThenFadeOut {
+          0%, 90%  { opacity: 0.35; }
+          45%      { opacity: 0.6; }
+          100%     { opacity: 0; }
+        }
+        @keyframes colorFlipToDark {
+          to { color: #111111; }
+        }
 
-        /* Bilah menyayat diagonal — sekarang 2 detik, gerakan lebih terasa & dramatis */
+        /* Bilah menyayat diagonal — 1 detik */
         @keyframes bladeSweep {
           0%   { transform: translateX(-50%) rotate(-12deg) translateY(-130%); opacity: 0; }
-          4%   { opacity: 1; }
-          92%  { opacity: 1; }
+          6%   { opacity: 1; }
+          88%  { opacity: 1; }
           100% { transform: translateX(-50%) rotate(-12deg) translateY(130%); opacity: 0; }
         }
 
@@ -182,7 +185,7 @@ const s = {
     justifyContent: "center",
     fontFamily: "'Courier New', monospace",
     cursor: "none",
-    animation: "stageShake 0.25s ease 3.3s",
+    animation: "stageShake 0.25s ease 1.8s",
   },
   gridBg: {
     position: "absolute", inset: 0,
@@ -206,7 +209,7 @@ const s = {
     zIndex: 1,
     display: "flex", alignItems: "center", justifyContent: "center",
     opacity: 0,
-    animation: "revealDash 0.6s ease 3.45s forwards",
+    animation: "revealDash 0.6s ease 1.95s forwards",
   },
 
   kanjiBg: {
@@ -235,7 +238,7 @@ const s = {
       "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(220,230,255,0.9) 12%, #ffffff 50%, rgba(220,230,255,0.9) 88%, rgba(255,255,255,0) 100%)",
     transform: "translateX(-50%) rotate(-12deg) translateY(-130%)",
     boxShadow: "0 0 16px 3px rgba(255,255,255,0.7), 0 0 46px 8px rgba(180,200,255,0.3)",
-    animation: "bladeSweep 2s cubic-bezier(0.45,0,0.4,1) 1.38s forwards",
+    animation: "bladeSweep 1s cubic-bezier(0.45,0,0.4,1) 0.9s forwards",
   },
   bladeGlow: {
     position: "absolute",
@@ -257,7 +260,7 @@ const s = {
     opacity: 0,
     zIndex: 22,
     pointerEvents: "none",
-    animation: "seamGlow 0.35s ease 3.35s forwards",
+    animation: "seamGlow 0.35s ease 1.82s forwards",
   },
 
   flash: {
@@ -266,7 +269,7 @@ const s = {
     zIndex: 30,
     pointerEvents: "none",
     opacity: 0,
-    animation: "flashPulse 0.32s ease 3.28s forwards",
+    animation: "flashPulse 0.32s ease 1.75s forwards",
   },
 
   sparkOrigin: {
@@ -302,49 +305,49 @@ const s = {
     animation: "fadeIn 0.4s ease 0.3s forwards",
   },
   mainLabel: {
-  fontSize: 10, letterSpacing: 8,
-  color: "rgba(255,255,255,0.35)",
-  textTransform: "uppercase",
-  marginBottom: 12,
-  animation: "fadeUp 0.5s 0.4s ease both, colorFlipToDark 0.4s ease 3.45s forwards",
-},
-mainName: {
-  fontFamily: "'Noto Serif JP', serif",
-  fontSize: 28, fontWeight: 300,
-  color: "#ffffff",
-  letterSpacing: -0.5,
-  lineHeight: 1.3,
-  animation: "fadeUp 0.5s 0.5s ease both, colorFlipToDark 0.4s ease 3.45s forwards",
-},
-mainRole: {
-  fontSize: 9, letterSpacing: 5,
-  color: "rgba(255,255,255,0.3)",
-  textTransform: "uppercase",
-  margin: "28px auto 0",
-  marginTop: 10,
-  animation: "fadeUp 0.5s 0.6s ease both, colorFlipToDark 0.4s ease 3.45s forwards",
-},
-statusWrap: {
-  position: "relative",
-  height: 14,
-  marginTop: 20,
-  animation: "fadeUp 0.5s 0.8s ease both",
-},
-statusText: {
-  position: "absolute",
-  top: 0, left: 0, right: 0,
-  fontSize: 9, letterSpacing: 4,
-  color: "rgba(255,255,255,0.35)",
-  textAlign: "center",
-  animation: "blinkThenFadeOut 2.45s 0.8s ease forwards",
-},
-statusText2: {
-  position: "absolute",
-  top: 0, left: 0, right: 0,
-  fontSize: 9, letterSpacing: 4,
-  color: "rgba(17,17,17,0.5)",
-  textAlign: "center",
-  opacity: 0,
-  animation: "fadeUp 0.4s 3.45s ease forwards",
-},
+    fontSize: 10, letterSpacing: 8,
+    color: "rgba(255,255,255,0.35)",
+    textTransform: "uppercase",
+    marginBottom: 12,
+    animation: "fadeUp 0.5s 0.4s ease both, colorFlipToDark 0.4s ease 1.95s forwards",
+  },
+  mainName: {
+    fontFamily: "'Noto Serif JP', serif",
+    fontSize: 28, fontWeight: 300,
+    color: "#ffffff",
+    letterSpacing: -0.5,
+    lineHeight: 1.3,
+    animation: "fadeUp 0.5s 0.5s ease both, colorFlipToDark 0.4s ease 1.95s forwards",
+  },
+  mainRole: {
+    fontSize: 9, letterSpacing: 5,
+    color: "rgba(255,255,255,0.3)",
+    textTransform: "uppercase",
+    margin: "28px auto 0",
+    marginTop: 10,
+    animation: "fadeUp 0.5s 0.6s ease both, colorFlipToDark 0.4s ease 1.95s forwards",
+  },
+  statusWrap: {
+    position: "relative",
+    height: 14,
+    marginTop: 20,
+    animation: "fadeUp 0.5s 0.8s ease both",
+  },
+  statusText: {
+    position: "absolute",
+    top: 0, left: 0, right: 0,
+    fontSize: 9, letterSpacing: 4,
+    color: "rgba(255,255,255,0.35)",
+    textAlign: "center",
+    animation: "blinkThenFadeOut 1.15s 0.8s ease forwards",
+  },
+  statusText2: {
+    position: "absolute",
+    top: 0, left: 0, right: 0,
+    fontSize: 9, letterSpacing: 4,
+    color: "rgba(17,17,17,0.5)",
+    textAlign: "center",
+    opacity: 0,
+    animation: "fadeUp 0.4s 1.95s ease forwards",
+  },
 };

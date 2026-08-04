@@ -23,10 +23,10 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
       className={`
         fixed z-50
         transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
-        bg-black/95
-        ${menuOpen ? "border-b border-white/10 backdrop-blur-md" : ""}
+        bg-[#212A3E]/95
+        ${menuOpen ? "border-b border-[#394867]/50 backdrop-blur-md" : ""}
         ${floating
-          ? "top-4 left-1/2 -translate-x-1/2 w-[92%] md:w-fit rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-xl"
+          ? "top-4 left-1/2 -translate-x-1/2 w-[92%] md:w-fit rounded-[2rem] border border-[#394867]/50 shadow-2xl backdrop-blur-xl"
           : "top-0 left-0 right-0 w-full rounded-none"
         }
       `}
@@ -45,7 +45,7 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
       >
 
         {/* Kanji logo */}
-        <div className="font-mono text-xl tracking-[0.25em] text-white">
+        <div className="font-mono text-xl tracking-[0.25em] text-[#F1F6F9]">
           {kanji}
         </div>
 
@@ -59,10 +59,10 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
                 font-mono uppercase tracking-[0.2em]
                 transition-all duration-300 cursor-pointer
                 bg-transparent border-none
-                text-white/50 hover:text-white
+                text-[#9BA4B5] hover:text-[#F1F6F9]
                 ${floating
-                  ? "text-sm px-4 py-2 rounded-full hover:bg-white/10"
-                  : "text-xl px-5"
+                  ? "text-sm px-4 py-2 rounded-full hover:bg-[#394867]/50"
+                  : "text-lg px-5"
                 }
               `}
             >
@@ -78,17 +78,17 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
           className="md:hidden flex flex-col gap-[5px] items-end bg-transparent border-none p-1 cursor-pointer"
         >
           <span className={`
-            block h-px bg-white w-5
+            block h-px bg-[#F1F6F9] w-5
             transition-transform duration-300 ease-in-out
             ${menuOpen ? "translate-y-[6px] rotate-45" : ""}
           `} />
           <span className={`
-            block h-px bg-white
+            block h-px bg-[#F1F6F9]
             transition-all duration-300 ease-in-out
             ${menuOpen ? "w-0 opacity-0" : "w-3.5 opacity-100"}
           `} />
           <span className={`
-            block h-px bg-white w-5
+            block h-px bg-[#F1F6F9] w-5
             transition-transform duration-300 ease-in-out
             ${menuOpen ? "-translate-y-[6px] -rotate-45" : ""}
           `} />
@@ -99,7 +99,7 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
       <div className={`
         md:hidden overflow-hidden
         transition-all duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)]
-        ${menuOpen ? "max-h-[400px] border-t border-white/10" : "max-h-0"}
+        ${menuOpen ? "max-h-[400px] border-t border-[#394867]/50" : "max-h-0"}
       `}>
         {sections.map((s, i) => (
           <button
@@ -110,8 +110,8 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
               px-6 py-4 bg-transparent border-none cursor-pointer
               font-mono text-[10px] tracking-[0.2em] uppercase text-left
               transition-colors duration-200
-              text-white/40 hover:text-white/60
-              ${i < sections.length - 1 ? "border-b border-white/5" : ""}
+              text-[#9BA4B5] hover:text-[#F1F6F9]
+              ${i < sections.length - 1 ? "border-b border-[#394867]/40" : ""}
             `}
             style={{
               opacity:          menuOpen ? 1 : 0,
@@ -123,7 +123,7 @@ export default function Navbar({ kanji, sections, scrollY, onNav }) {
             }}
           >
             <span>{s}</span>
-            <span className="text-[9px] tracking-wide font-mono text-white/20">
+            <span className="text-[9px] tracking-wide font-mono text-[#9BA4B5]/50">
               {String(i + 1).padStart(2, "0")}
             </span>
           </button>

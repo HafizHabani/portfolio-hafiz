@@ -6,24 +6,24 @@ export default function Skills({ skills }) {
   return (
     <section
       id="skills"
-      className="px-6 md:px-12 py-10 md:py-14 bg-[#111] relative overflow-hidden"
+      className="px-6 md:px-12 py-10 md:py-14 bg-[#212A3E] relative overflow-hidden"
     >
       {/* Kanji watermark */}
       <div
         className="absolute right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none font-serif leading-none"
-        style={{ fontSize: "clamp(120px, 20vw, 260px)", color: "rgba(255,255,255,0.025)" }}
+        style={{ fontSize: "clamp(120px, 20vw, 260px)", color: "rgba(241,246,249,0.03)" }}
       >術</div>
 
       <div className="max-w-[1100px] mx-auto relative z-10">
 
         <Animblock>
-          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#BFBFBF] mb-8 uppercase">
+          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#9BA4B5] mb-8 uppercase">
             02 &nbsp;/&nbsp; Skills
           </div>
-          <h2 className="font-serif font-light text-[38px] md:text-[46px] tracking-[-0.02em] text-white mb-4 leading-[1.15]">
+          <h2 className="font-serif font-light text-[38px] md:text-[46px] tracking-[-0.02em] text-[#F1F6F9] mb-4 leading-[1.15]">
             Technical<br />Stack.
           </h2>
-          <p className="font-mono text-[15px] md:text-[16px] text-[#BFBFBF] mb-14 max-w-md leading-[1.8]">
+          <p className="font-mono text-[15px] md:text-[16px] text-[#9BA4B5] mb-14 max-w-md leading-[1.8]">
             Tools and technologies I use to build, configure, and maintain systems.
           </p>
         </Animblock>
