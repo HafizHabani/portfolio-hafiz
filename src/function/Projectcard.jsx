@@ -12,7 +12,7 @@ export default function Projectcard({ project }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="flex flex-col justify-between p-8 md:p-10 min-h-[280px] no-underline transition-colors duration-300"
-      style={{ background: hovered ? "#111" : "#fafaf8", cursor: "none" }}
+      style={{ background: hovered ? "#212A3E" : "#F1F6F9", cursor: "none" }}
     >
       {/* Top */}
       <div>
@@ -20,13 +20,13 @@ export default function Projectcard({ project }) {
         <div className="flex justify-between items-center mb-5">
           <span
             className="font-mono text-[10px] tracking-[0.25em]"
-            style={{ color: hovered ? "#444" : "#ccc" }}
+            style={{ color: hovered ? "#9BA4B5" : "#9BA4B5" }}
           >
             {project.id}
           </span>
           <span
             className="font-mono text-[10px] tracking-[0.15em]"
-            style={{ color: hovered ? "#444" : "#ccc" }}
+            style={{ color: hovered ? "#9BA4B5" : "#9BA4B5" }}
           >
             {project.year}
           </span>
@@ -35,7 +35,7 @@ export default function Projectcard({ project }) {
         {/* Name */}
         <h3
           className="font-serif font-light text-[18px] md:text-[20px] tracking-[-0.02em] mb-3 leading-[1.3] transition-colors duration-300"
-          style={{ color: hovered ? "#fff" : "#111" }}
+          style={{ color: hovered ? "#F1F6F9" : "#212A3E" }}
         >
           {project.name}
         </h3>
@@ -43,7 +43,7 @@ export default function Projectcard({ project }) {
         {/* Description — more readable size */}
         <p
           className="font-mono text-[12px] leading-[1.75] transition-colors duration-300"
-          style={{ color: hovered ? "#666" : "#777" }}
+          style={{ color: hovered ? "#9BA4B5" : "#394867" }}
         >
           {project.desc}
         </p>
@@ -57,8 +57,8 @@ export default function Projectcard({ project }) {
               key={t}
               className="font-mono text-[9px] tracking-[0.12em] px-2.5 py-1 transition-all duration-300"
               style={{
-                border: `1px solid ${hovered ? "#333" : "#e0e0e0"}`,
-                color:  hovered ? "#555" : "#aaa",
+                border: `1px solid ${hovered ? "#394867" : "#9BA4B5"}`,
+                color:  hovered ? "#9BA4B5" : "#394867",
               }}
             >
               {t}
@@ -70,7 +70,7 @@ export default function Projectcard({ project }) {
         <span
           className="font-mono text-[13px] shrink-0 transition-all duration-300"
           style={{
-            color:     hovered ? "#fff" : "#ddd",
+            color:     hovered ? "#F1F6F9" : "#394867",
             transform: hovered ? "translate(3px, -3px)" : "translate(0,0)",
             display:   "inline-block",
           }}
