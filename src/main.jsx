@@ -7,11 +7,10 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio-hafiz">
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/Dashboard" element={<Dashboard />} />
-        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
