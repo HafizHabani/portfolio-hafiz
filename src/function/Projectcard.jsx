@@ -19,13 +19,13 @@ export default function Projectcard({ project }) {
         {/* ID + Year */}
         <div className="flex justify-between items-center mb-5">
           <span
-            className="font-mono text-[10px] tracking-[0.25em]"
+            className="font-mono text-[14px] tracking-[0.25em]"
             style={{ color: hovered ? "#9BA4B5" : "#9BA4B5" }}
           >
             {project.id}
           </span>
           <span
-            className="font-mono text-[10px] tracking-[0.15em]"
+            className="font-mono text-[12px] tracking-[0.15em]"
             style={{ color: hovered ? "#9BA4B5" : "#9BA4B5" }}
           >
             {project.year}
@@ -55,7 +55,7 @@ export default function Projectcard({ project }) {
           {project.tags.map(t => (
             <span
               key={t}
-              className="font-mono text-[9px] tracking-[0.12em] px-2.5 py-1 transition-all duration-300"
+              className="font-mono text-[12px] tracking-[0.12em] px-2.5 py-1 transition-all duration-300"
               style={{
                 border: `1px solid ${hovered ? "#394867" : "#9BA4B5"}`,
                 color:  hovered ? "#9BA4B5" : "#394867",

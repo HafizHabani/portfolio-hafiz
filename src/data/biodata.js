@@ -4,6 +4,12 @@
 //  Dashboard.jsx akan otomatis menggunakan file ini.
 // ============================================================
 
+// Preview screenshots dipakai di section Projects (panel "UI Web" / "UI Android").
+// Taruh file barumu di folder yang sama lalu import di sini, contoh:
+//   import previewWebFoodlink from "../assets/preview/web/foodlink.jpg";
+import previewWebSpbe from "../assets/preview/web/spbe-malang.jpg";
+import previewAndroidSpbe from "../assets/preview/android/spbe-malang.jpg";
+
 const data = {
   name: "Muhammad Hafiz Habani Nelwan",
   role: "IT Engineer",
@@ -73,7 +79,9 @@ const data = {
     desc: "Government digital services platform built with React.js, featuring responsive UI and Laravel API integration.",
     tags: ["React.js", "Tailwind CSS", "Vite"],
     year: "2024",
-    link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.malang.git"
+    link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.malang.git",
+    previewWeb: previewWebSpbe,
+    previewAndroid: previewAndroidSpbe
   },
   {
     id: "02",
