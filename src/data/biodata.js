@@ -8,6 +8,7 @@
 // Taruh file barumu di folder yang sama lalu import di sini, contoh:
 //   import previewWebFoodlink from "../assets/preview/web/foodlink.jpg";
 import previewWebSpbe from "../assets/preview/web/spbe-malang.jpg";
+import previewWebSpbebe from "../assets/preview/web/spbe-malang-be.png";
 import previewAndroidSpbe from "../assets/preview/android/spbe-malang.jpg";
 
 const data = {
@@ -89,7 +90,8 @@ const data = {
     desc: "RESTful backend for an e-Government platform with Laravel, authentication, and database management.",
     tags: ["Laravel", "REST API", "MySQL"],
     year: "2024",
-    link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.Malang-Be.git"
+    link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.Malang-Be.git",
+    previewWeb: previewWebSpbebe,
   },
   {
     id: "03",
