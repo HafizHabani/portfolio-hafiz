@@ -3,64 +3,63 @@ import Animblock from "../function/Animblock";
 
 export default function Contact({ data }) {
   const links = [
-    { key: "Email", val: data.contact.email, href: `mailto:${data.contact.email}` },
-    { key: "GitHub", val: data.contact.github, href: `https://${data.contact.github}` },
-    { key: "LinkedIn", val: data.contact.linkedin, href: `https://${data.contact.linkedin}` },
-    { key: "Location", val: data.contact.location, href: null },
+    { key: "Email",     val: data.contact.email,      href: `mailto:${data.contact.email}` },
+    { key: "GitHub",    val: data.contact.github,     href: `https://${data.contact.github}` },
+    { key: "LinkedIn",  val: data.contact.linkedin,   href: `https://${data.contact.linkedin}` },
+    { key: "Location",  val: data.contact.location,   href: null },
   ];
+
+  const nav = ["About", "Services", "Works", "Experience"];
 
   return (
     <section
       id="contact"
-      className="px-6 md:px-12 py-10 md:py-14 bg-[#212A3E] relative overflow-hidden"
+      className="relative px-5 sm:px-8 md:px-12 py-20 md:py-28 bg-[var(--page)] text-[var(--ink)] overflow-hidden"
     >
-      {/* Kanji watermark */}
+      {/* ambient glow */}
       <div
-        className="absolute -left-8 -bottom-16 select-none pointer-events-none font-serif leading-none"
-        style={{ fontSize: "clamp(120px, 22vw, 280px)", color: "rgba(241,246,249,0.025)" }}
-      >繋</div>
+        className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[760px] h-[460px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(closest-side, var(--glow-a), transparent)" }}
+      />
 
-      <div className="max-w-[1100px] mx-auto relative z-10">
+      <div className="max-w-[1120px] mx-auto relative z-10">
 
+        {/* Big CTA — centered, Binjan footer style */}
         <Animblock>
-          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#9BA4B5] mb-8 uppercase">
-            05 &nbsp;/&nbsp; Contact
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--ink-3)] mb-5">
+              05 / Contact
+            </div>
+            <h2 className="font-display font-semibold text-[38px] md:text-[56px] tracking-[-0.03em] leading-[1.06] text-[var(--ink)]">
+              Let's make something
+              <br />
+              <span className="gradient-text">amazing together.</span>
+            </h2>
+
+            {/* "Start by saying hi" accent link */}
+            <a
+              href={`mailto:${data.contact.email}`}
+              className="inline-block mt-8 font-sans text-[17px] md:text-[19px] font-medium text-[var(--accent)] hover:text-[var(--accent-h)] transition-colors duration-200 pb-1 border-b border-[var(--accent)] hover:border-[var(--accent-h)]"
+            >
+              Start by saying hi →
+            </a>
+
+            <div className="mt-5">
+              <a href="https://wa.me/6285173077553" target="_blank" rel="noopener noreferrer" className="btn-ghost inline-flex">
+                Chat on WhatsApp <span aria-hidden>→</span>
+              </a>
+            </div>
           </div>
-          <h2 className="font-serif font-light text-[40px] md:text-[58px] tracking-[-0.02em] text-[#F1F6F9] mb-4 leading-[1.1]">
-            Let's<br />Collaborate.
-          </h2>
-          <p className="font-mono text-[15px] md:text-[16px] text-[#9BA4B5] mb-14 max-w-md leading-[1.8]">
-            Open for freelance projects, full-time opportunities, or a casual tech discussion.
-          </p>
         </Animblock>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-
-          {/* CTA button */}
-          <Animblock delay={0.15}>
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=hafizhbniwork@gmail.com&su=Let's%20Collaborate"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block font-mono text-[13px] tracking-[0.2em] uppercase text-[#F1F6F9] border border-[#394867] px-8 py-4 transition-all duration-300 hover:bg-[#F1F6F9] hover:text-[#212A3E] mb-4"
-              style={{ cursor: "none" }}
-            >
-              Send Me an Email →
-            </a>
-            <a
-              href="https://wa.me/6285173077553"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block font-mono text-[13px] tracking-[0.2em] uppercase text-[#F1F6F9] border border-[#394867] px-8 py-4 transition-all duration-300 hover:bg-[#F1F6F9] hover:text-[#212A3E] mb-12"
-              style={{ cursor: "none" }}
-            >
-              Chat Me on WhatsApp →
-            </a>
-            {/* Social links */}
-            <div className="flex flex-col gap-1">
+        {/* Contact info + status */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 mt-20">
+          <Animblock delay={0.1}>
+            <div className="glass rounded-3xl p-8 md:p-9 h-full">
+              <div className="label mb-6 text-[var(--ink-3)]">Reach me</div>
               {links.map(({ key, val, href }) => (
-                <div key={key} className="flex justify-between items-center py-4 border-b border-[#394867]/40">
-                  <span className="font-mono text-[12px] tracking-[0.25em] text-[#9BA4B5] uppercase">
+                <div key={key} className={`flex justify-between items-baseline py-3.5 ${key !== "Location" ? "border-b border-[var(--line-2)]" : ""}`}>
+                  <span className="mono text-[11px] tracking-[0.15em] text-[var(--ink-3)] uppercase">
                     {key}
                   </span>
                   {href ? (
@@ -68,57 +67,65 @@ export default function Contact({ data }) {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-[13px] text-[#9BA4B5] hover:text-[#F1F6F9] transition-colors duration-200 tracking-[0.01em]"
-                      style={{ cursor: "none" }}
+                      className="font-sans text-[14px] text-[var(--ink-2)] hover:text-[var(--ink)] transition-colors duration-200 tracking-[0.01em] text-right break-all"
                     >
                       {val}
                     </a>
                   ) : (
-                    <span className="font-mono text-[13px] text-[#9BA4B5] tracking-[0.01em]">{val}</span>
+                    <span className="font-sans text-[14px] text-[var(--ink-2)] tracking-[0.01em] text-right">{val}</span>
                   )}
                 </div>
               ))}
             </div>
           </Animblock>
 
-          {/* Availability card */}
-          <Animblock delay={0.25}>
-            <div className="border border-[#394867]/50 p-8 relative">
-              <div className="absolute -top-px left-8 bg-[#212A3E] px-3 font-mono text-[11px] tracking-[0.2em] text-[#9BA4B5] uppercase">
-                Status
-              </div>
-
-              {/* Green dot + status */}
-              <div className="flex items-center gap-3 mb-6">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="font-mono text-[13px] tracking-[0.1em] text-[#9BA4B5]">
+          <Animblock delay={0.18}>
+            <div className="glass rounded-3xl p-8 md:p-9 h-full">
+              <div className="label mb-6 text-[var(--ink-3)]">Status</div>
+              <div className="flex items-center gap-3 mb-5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[var(--dot)]" style={{ animation: "pulseDot 1.8s ease-in-out infinite" }} />
+                <span className="font-sans text-[14px] font-medium tracking-[0.04em] text-[var(--ink)]">
                   Available for Work
                 </span>
               </div>
-
-              <p className="font-mono text-[14px] text-[#9BA4B5] leading-[1.8] mb-6">
+              <p className="font-sans text-[15px] text-[var(--ink-2)] leading-[1.85] mb-7">
                 Currently open to IT Engineering roles, freelance web projects, and infrastructure consulting engagements.
               </p>
-
-              {/* Response time */}
-              <div className="border-t border-[#394867]/40 pt-6">
-                <div className="font-mono text-[11px] tracking-[0.25em] text-[#9BA4B5] uppercase mb-1">
-                  Avg. Response Time
-                </div>
-                <div className="font-serif font-light text-[24px] text-[#F1F6F9] tracking-[-0.02em]">
+              <div className="border-t border-[var(--line-2)] pt-6">
+                <div className="label mb-1.5 text-[var(--ink-3)]">Avg. Response Time</div>
+                <div className="font-display text-[28px] font-medium text-[var(--ink)] tracking-[-0.02em]">
                   &lt; 24 hours
                 </div>
               </div>
             </div>
           </Animblock>
-
         </div>
 
-        {/* Footer */}
-        <div className="mt-20 pt-10 border-t border-[#394867]/40 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-          <span className="font-serif text-[18px] text-[#394867]">{data.kanji}</span>
-          <span className="font-mono text-[12px] tracking-[0.1em] text-[#9BA4B5]">
-            © 2025 {data.name} — All rights reserved
+        {/* Footer bar */}
+        <div className="mt-16 md:mt-20 pt-8 border-t border-[var(--line)] flex flex-col md:flex-row items-center justify-between gap-6">
+          <span className="font-display text-[20px] font-medium text-[var(--ink)]">
+            Hafiz<span className="gradient-text">.</span>
+          </span>
+
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {nav.map((n) => (
+              <a
+                key={n}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const map = { About: "about", Services: "skills", Works: "projects", Experience: "experience" };
+                  document.getElementById(map[n])?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="font-sans text-[13px] text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors duration-200"
+              >
+                {n}
+              </a>
+            ))}
+          </nav>
+
+          <span className="font-sans text-[13px] text-[var(--ink-3)]">
+            © 2025 {data.name}
           </span>
         </div>
 

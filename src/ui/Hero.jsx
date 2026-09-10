@@ -1,209 +1,208 @@
 // src/ui/Hero.jsx
-import Animblock from "../function/Animblock";
 import meImg from "../assets/png/Me.png";
+import cvPdf from "../assets/pdf/CV Indonesia.pdf";
 
-export default function Hero({ data, scrollY }) {
+/*
+ * Decorative background objects:
+ *  - dark mode  → round (dots / rings)
+ *  - light mode → plus (✚ editorial marks)
+ *  - the `toggle` object IS the light/dark switcher.
+ */
+const OBJECTS = [
+  { id: "a", x: "10%",  y: "16%", size: 14, kind: "ring" },
+  { id: "b", x: "88%",  y: "12%", size: 10, kind: "dot"  },
+  { id: "c", x: "5%",   y: "74%", size: 12, kind: "dot"  },
+  { id: "d", x: "44%",  y: "6%",  size: 8,  kind: "ring" },
+  { id: "e", x: "72%",  y: "84%", size: 10, kind: "ring" },
+  { id: "t", x: "81%",  y: "76%", size: 34, kind: "toggle", toggle: true },
+];
+
+export default function Hero({ data, theme, onToggleTheme }) {
   const stats = data.stats;
-  const featuredStat = stats[0];
+  const words = data.name.split(" ");
+  const firstName = words.slice(0, 2).join(" ");
+  const lastName  = words.slice(2).join(" ");
+  const isDark = theme !== "light";
+
+  /* ### -- helper: get the shape class for an object given current theme -- */
+  const shapeFor = (o) => {
+    if (o.kind === "toggle") return isDark ? "hero-obj-dot hero-obj-toggle" : "hero-obj-plus hero-obj-thick hero-obj-toggle";
+    if (o.kind === "ring")   return isDark ? "hero-obj-ring" : "hero-obj-plus";
+    return isDark ? "hero-obj-dot" : "hero-obj-plus";
+  };
 
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] flex items-center overflow-hidden"
+      className="relative min-h-[100svh] flex items-center overflow-hidden bg-[var(--page)]"
     >
-      {/* Animated gradient background — new palette */}
+
+      {/* subtle grid */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          background:
-            "linear-gradient(120deg, #F1F6F9 0%, #e4ebf0 20%, #F1F6F9 40%, #dbe4ea 60%, #F1F6F9 80%, #eaf0f3 100%)",
-          backgroundSize: "400% 400%",
-          animation: "gradientShift 12s ease infinite",
+          backgroundImage:
+            `linear-gradient(var(--grid-line) 1px, transparent 1px),` +
+            `linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
+          backgroundSize: "64px 64px",
+          maskImage: "radial-gradient(ellipse 90% 70% at 50% 30%, #000 40%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 90% 70% at 50% 30%, #000 40%, transparent 100%)",
         }}
       />
 
-      {/* Kanji watermark */}
+      {/* ambient gradient orbs */}
       <div
-        className="absolute right-0 md:right-4 select-none pointer-events-none z-0"
+        className="absolute -top-40 right-[8%] w-[560px] h-[560px] rounded-full pointer-events-none"
         style={{
-          fontSize: "clamp(90px, 28vw, 320px)",
-          color: "rgba(33,42,62,0.05)",
-          fontFamily: "'Noto Serif JP', serif",
-          lineHeight: 1,
-          transform: `translateY(calc(-50% + ${scrollY * 0.15}px))`,
+          background: "radial-gradient(closest-side, var(--glow-a), transparent)",
+          filter: "blur(10px)",
+          animation: "orbFloat 12s ease-in-out infinite",
         }}
-      >
-        飛
+      />
+      <div
+        className="absolute -bottom-48 left-[4%] w-[620px] h-[620px] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(closest-side, var(--glow-b), transparent)",
+          filter: "blur(10px)",
+          animation: "orbFloat2 15s ease-in-out infinite",
+        }}
+      />
+
+      {/* decorative objects — keyed by theme so they re-pop + morph */}
+      <div key={theme} className="absolute inset-0 z-[6]">
+        {OBJECTS.map((o) => (
+          <span
+            key={o.id}
+            className={`hero-obj ${shapeFor(o)} ${o.toggle ? "hero-obj-toggle" : ""}`}
+            style={{ left: o.x, top: o.y, width: o.size, height: o.size }}
+            onClick={o.toggle ? onToggleTheme : undefined}
+            role={o.toggle ? "button" : undefined}
+            tabIndex={o.toggle ? 0 : undefined}
+            aria-label={o.toggle
+              ? (isDark ? "Switch to light mode" : "Switch to dark mode")
+              : undefined}
+            title={o.toggle
+              ? (isDark ? "Switch to light mode" : "Switch to dark mode")
+              : undefined}
+          />
+        ))}
       </div>
 
       {/* Content wrapper */}
-      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-5 sm:px-6 md:px-12 pt-24 pb-14">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="relative z-10 w-full max-w-[1120px] mx-auto px-5 sm:px-8 md:px-12 pt-28 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-10 items-center">
 
-          {/* Left — text content */}
+          {/* Left — text */}
           <div>
-            {/* Role label */}
+            {/* kicker */}
             <div
-              className="font-mono text-[12px] sm:text-[14px] tracking-[0.2em] sm:tracking-[0.3em] text-[#394867] mb-5 break-words"
-              style={{ animation: "fadeUp 0.8s 0.2s ease both" }}
+              className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--ink-2)] flex items-center gap-2.5"
+              style={{ animation: "fadeUp 0.7s 0.1s cubic-bezier(0.16,1,0.3,1) both" }}
             >
-              {data.role.toUpperCase()} &nbsp;/&nbsp; PORTFOLIO
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--dot)]" style={{ animation: "pulseDot 1.8s ease-in-out infinite" }} />
+              Hey there, I'm
             </div>
 
-            {/* Name */}
+            {/* Name — editorial two-line: white bold + italic gradient accent */}
             <h1
-              className="font-serif font-light leading-[1.05] tracking-[-0.02em] sm:tracking-[-0.03em] mb-4 text-[#212A3E]"
-              style={{
-                fontSize: "clamp(34px, 8vw, 64px)",
-                animation: "fadeUp 0.8s 0.4s ease both",
-              }}
+              className={`font-display font-bold tracking-[-0.03em] mt-6 text-[var(--ink)]`}
+              style={{ fontSize: "clamp(42px, 7.5vw, 84px)", lineHeight: 1.02, animation: "fadeUp 0.7s 0.2s cubic-bezier(0.16,1,0.3,1) both" }}
             >
-              {data.name.split(" ").map((w, i) => (
-                <span key={i} className="block">
-                  {w}
-                </span>
-              ))}
+              {firstName}
+              <span
+                className="block gradient-text italic"
+                style={{ letterSpacing: "0.01em" }}
+              >
+                {lastName}
+              </span>
             </h1>
 
-            {/* Tagline */}
-            <div
-              className="font-mono text-[15px] sm:text-[17px] text-[#394867] tracking-[0.03em] mt-4 mb-8 max-w-md leading-[1.8]"
-              style={{ animation: "fadeUp 0.8s 0.6s ease both" }}
+            {/* Role + tagline */}
+            <p
+              className="font-sans text-[18px] md:text-[20px] text-[var(--ink-2)] mt-6 max-w-lg leading-[1.7]"
+              style={{ animation: "fadeUp 0.7s 0.32s cubic-bezier(0.16,1,0.3,1) both" }}
             >
-              — {data.tagline}
-            </div>
+              {data.role} — {data.tagline}
+            </p>
+
+            {/* Email accent */}
+            <a
+              href={`mailto:${data.contact.email}`}
+              className="inline-flex items-center gap-2 font-mono text-[15px] md:text-[16px] text-[var(--accent)] mt-5 hover:underline underline-offset-4 transition-colors"
+              style={{ animation: "fadeUp 0.7s 0.42s cubic-bezier(0.16,1,0.3,1) both" }}
+            >
+              {data.contact.email} <span aria-hidden>↗</span>
+            </a>
 
             {/* Buttons */}
             <div
-              className="flex flex-wrap gap-4"
-              style={{ animation: "fadeUp 0.8s 0.7s ease both" }}
+              className="flex flex-wrap gap-3 mt-9"
+              style={{ animation: "fadeUp 0.7s 0.5s cubic-bezier(0.16,1,0.3,1) both" }}
             >
-              <a 
-                href="src/assets/pdf/CV Indonesia.pdf"
-                download
-                className="inline-block font-mono text-[12px] sm:text-[13px] tracking-[0.2em] uppercase text-[#F1F6F9] bg-[#212A3E] border border-[#212A3E] px-7 py-3.5 transition-all duration-300 hover:bg-[#F1F6F9] hover:text-[#212A3E]"
-              >
-                Download CV ↓
+              <a href={cvPdf} download className="btn-primary">
+                Download CV <span aria-hidden>↓</span>
               </a>
-              <a 
-                href="#contact"
-                className="inline-block font-mono text-[12px] sm:text-[13px] tracking-[0.2em] uppercase text-[#212A3E] border border-[#212A3E] px-7 py-3.5 transition-all duration-300 hover:bg-[#212A3E] hover:text-[#F1F6F9]"
-              >
+              <a href="#contact" className="btn-ghost">
                 Contact Me
               </a>
             </div>
-
-            {/* Featured stat, mobile-only quick preview */}
-            {featuredStat && (
-              <div
-                className="lg:hidden mt-10 pt-6 border-t border-[#9BA4B5]/30"
-                style={{ animation: "fadeUp 0.8s 0.8s ease both" }}
-              >
-                <div className="font-serif font-light text-[28px] tracking-[-0.02em] leading-none text-[#212A3E]">
-                  {featuredStat.value}
-                </div>
-                <div className="font-mono text-[11px] tracking-[0.2em] text-[#394867] mt-2 uppercase">
-                  {featuredStat.label}
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Right — photo with decorative elements */}
+          {/* Right — portrait, natural (no frame) + graphic shapes */}
           <div
-            className="relative flex justify-center lg:justify-end"
-            style={{ animation: "fadeUp 0.8s 0.5s ease both" }}
+            className="relative flex justify-center lg:justify-end py-8"
+            style={{ animation: "fadeUp 0.7s 0.3s cubic-bezier(0.16,1,0.3,1) both" }}
           >
-            {/* Decorative circle behind photo */}
-            <div
-              className="absolute rounded-full bg-[#9BA4B5]/30"
-              style={{
-                width: "min(80%, 380px)",
-                height: "min(80%, 380px)",
-                top: "5%",
-                right: "5%",
-              }}
-            />
+            <div className="relative">
+              {/* large decorative ring behind-left (round in dark, plus in light) */}
+              <span
+                key={`lg-${theme}`}
+                className={`hero-obj hero-obj-lg ${isDark ? "hero-obj-ring" : "hero-obj-plus"}`}
+                style={{ left: "-34%", top: "-8%", width: 300, height: 300 }}
+              />
 
-            {/* Dot grid pattern */}
-            <div
-              className="absolute -bottom-4 -left-2 grid grid-cols-6 gap-1.5 pointer-events-none"
-              aria-hidden="true"
-            >
-              {Array.from({ length: 24 }).map((_, i) => (
-                <span
-                  key={i}
-                  className="w-1 h-1 rounded-full bg-[#394867]/40"
-                />
-              ))}
-            </div>
+              {/* photo — bare, no frame */}
+              <img
+                src={meImg}
+                alt={data.name}
+                className="relative z-10 w-[300px] sm:w-[340px] md:w-[380px] h-auto object-cover select-none"
+              />
 
-            {/* Photo */}
-            <img
-              src={meImg}
-              alt={data.name}
-              className="relative z-10 w-[240px] sm:w-[300px] md:w-[340px] h-auto -bottom-8 object-cover select-none"
-              style={{ filter: "grayscale(100%) contrast(1.05)" }}
-            />
-
-            {/* Floating featured stat card — desktop only */}
-            {featuredStat && (
-              <div className="hidden lg:block absolute z-20 bottom-6 -right-4 bg-[#F1F6F9] shadow-lg px-6 py-5 border border-[#9BA4B5]/40">
-                <div className="font-serif font-light text-[28px] tracking-[-0.02em] leading-none text-[#212A3E]">
-                  {featuredStat.value}
-                </div>
-                <div className="font-mono text-[11px] tracking-[0.15em] text-[#394867] mt-1 uppercase">
-                  {featuredStat.label}
-                </div>
+              {/* circular "Open to Work" badge */}
+              <div
+                key={`badge-${theme}`}
+                className="absolute z-20 left-[-2%] sm:left-[-6%] top-[14%] w-28 h-28 rounded-full flex flex-col items-center justify-center text-center gap-1"
+                style={{
+                  background: "var(--card)",
+                  border: "1px solid var(--line)",
+                  animation: "heroObjPop 0.55s var(--ease-inout)",
+                }}
+              >
+                <span className="w-2 h-2 rounded-full bg-[var(--dot)]" style={{ animation: "pulseDot 1.8s ease-in-out infinite" }} />
+                <span className="mono text-[9px] tracking-[0.14em] uppercase text-[var(--ink-2)]">Open to</span>
+                <span className="font-display text-[17px] font-semibold gradient-text leading-none">Work</span>
               </div>
-            )}
+            </div>
           </div>
         </div>
 
-        {/* Full stats row */}
+        {/* Stats strip */}
         <div
-          className="grid mt-16 md:mt-20 border-t border-[#9BA4B5]/30 pt-2"
-          style={{
-            gridTemplateColumns: `repeat(auto-fit, minmax(110px, 1fr))`,
-            animation: "fadeUp 0.8s 0.9s ease both",
-          }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-5 gap-y-6 mt-14 pt-8 border-t border-[var(--line)]"
+          style={{ animation: "fadeUp 0.7s 0.6s cubic-bezier(0.16,1,0.3,1) both" }}
         >
           {stats.map((s) => (
-            <div
-              key={s.label}
-              className="pt-5 sm:pt-6 pl-4 sm:pl-6 md:pl-8 pr-4 sm:pr-6 md:pr-8"
-            >
-              <div className="font-serif font-light text-[22px] sm:text-[26px] md:text-[32px] tracking-[-0.02em] sm:tracking-[-0.03em] leading-none text-[#212A3E]">
+            <div key={s.label}>
+              <div className="font-display text-[24px] md:text-[28px] font-semibold tracking-[-0.02em] leading-none text-[var(--ink)]">
                 {s.value}
               </div>
-              <div className="font-mono text-[10px] sm:text-[12px] md:text-[14px] tracking-[0.15em] sm:tracking-[0.3em] text-[#394867] mt-2 uppercase">
+              <div className="font-sans text-[11px] md:text-[12px] text-[var(--ink-3)] mt-2">
                 {s.label}
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <div
-        className="hidden xs:flex absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
-        style={{ animation: "fadeUp 1s 1.2s ease both" }}
-      >
-        <span className="font-mono text-[9px] tracking-[0.4em] text-[#9BA4B5]">SCROLL</span>
-        <div
-          className="w-px h-6 bg-[#9BA4B5]"
-          style={{ animation: "scrollLine 1.5s ease-in-out infinite" }}
-        />
-      </div>
-
-      {/* Keyframes */}
-      <style>{`
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
     </section>
   );
 }

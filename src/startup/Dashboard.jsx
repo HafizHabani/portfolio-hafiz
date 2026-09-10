@@ -9,23 +9,58 @@ import Projects   from "../ui/Projects";
 import Experience from "../ui/Experience";
 import Contact    from "../ui/Contact";
 
+const SECTIONS = ["hero", "about", "skills", "projects", "experience", "contact"];
+
+/* pre-render: apply saved theme so there's no flash */
+const initialTheme = localStorage.getItem("pf-theme") === "light" ? "light" : "dark";
+document.documentElement.setAttribute("data-theme", initialTheme);
+
 export default function Dashboard() {
-  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [scrollY,   setScrollY]   = useState(0);
   const [activeNav, setActiveNav] = useState("hero");
+  const [theme,     setTheme]     = useState(initialTheme);
 
   useEffect(() => {
-    const onMove   = (e) => setCursorPos({ x: e.clientX, y: e.clientY });
-    const onScroll = ()  => setScrollY(window.scrollY);
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("scroll",    onScroll);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (typeof localStorage !== "undefined") localStorage.setItem("pf-theme", theme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = theme === "dark" ? "#0A0A0A" : "#F6F6F7";
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+
+  useEffect(() => {
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      setScrollY(window.scrollY);
+
+      // scrollspy: highlight the section whose top is closest above the fold
+      const probe = window.scrollY + Math.round(window.innerHeight * 0.32);
+      let current = SECTIONS[0];
+      for (const id of SECTIONS) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= probe) current = id;
+      }
+      setActiveNav(current);
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
     return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("scroll",    onScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
-
-  const sections = ["hero", "about", "skills", "projects", "experience", "contact"];
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -33,46 +68,23 @@ export default function Dashboard() {
   };
 
   return (
-    <div style={{ background: "#fafaf8", color: "#111", minHeight: "100vh", fontFamily: "'Noto Serif JP', Georgia, serif", cursor: "none" }}>
-
-      {/* Custom cursor */}
-      <div style={{
-        position: "fixed", pointerEvents: "none", zIndex: 9999,
-        left: cursorPos.x - 6, top: cursorPos.y - 6,
-        width: 12, height: 12,
-        border: "1px solid #111", borderRadius: "50%",
-        mixBlendMode: "difference",
-        background: "white",
-      }} />
+    <div className="bg-[var(--page)] text-[var(--ink)] min-h-screen font-sans antialiased">
 
       <Navbar
-        kanji={data.kanji}
-        sections={sections}
+        name={data.name}
+        sections={SECTIONS}
         activeNav={activeNav}
         scrollY={scrollY}
         onNav={scrollTo}
       />
 
-      <Hero     data={data}               scrollY={scrollY} />
-      <About      data={data}                                  />
-      <Skills     skills={data.skills}                         />
-      <Projects   projects={data.projects}                     />
-      <Experience experience={data.experience}                 />
-      <Contact    data={data}                                  />
+      <Hero     data={data} theme={theme} onToggleTheme={toggleTheme} />
+      <About    data={data}                                  />
+      <Skills   skills={data.skills}                         />
+      <Projects projects={data.projects}                     />
+      <Experience experience={data.experience}               />
+      <Contact  data={data}                                  />
 
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&display=swap');
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scrollLine {
-          0%, 100% { transform: scaleY(1); opacity: 1; }
-          50%       { transform: scaleY(0.3); opacity: 0.3; }
-        }
-      `}</style>
     </div>
   );
 }

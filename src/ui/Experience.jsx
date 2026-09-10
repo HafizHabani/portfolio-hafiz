@@ -6,38 +6,34 @@ export default function Experience({ experience }) {
   return (
     <section
       id="experience"
-      className="px-5 sm:px-6 md:px-12 py-10 md:py-14 bg-[#F1F6F9] border-t border-[#9BA4B5]/30"
+      className="px-5 sm:px-8 md:px-12 py-20 md:py-28 bg-[var(--surface)] border-t border-[var(--line)]"
     >
-      <div className="max-w-[1100px] mx-auto">
+      <div className="max-w-[1120px] mx-auto">
 
         <Animblock>
-          {/* Section label */}
-          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.3em] sm:tracking-[0.4em] text-[#394867] mb-6 md:mb-8 uppercase">
-            04 &nbsp;/&nbsp; Experience
+          <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--accent)] mb-4">
+            My Work Experience
           </div>
-
-          {/* Heading */}
-          <h2
-            className="font-serif font-light leading-[1.15] tracking-[-0.02em] mb-3 text-[#212A3E]"
-            style={{
-              fontSize: "clamp(32px, 6vw, 46px)",
-            }}
-          >
-            Work<br />Experience.
+          <h2 className="font-display font-semibold text-[36px] md:text-[46px] tracking-[-0.03em] leading-[1.1] text-[var(--ink)] mb-4">
+            Where I've worked.
           </h2>
-
-          {/* Description */}
-          <p className="font-mono text-[15px] md:text-[16px] text-[#394867] tracking-[0.01em] mb-10 md:mb-14 max-w-lg leading-[1.8]">
+          <p className="font-sans text-[16px] md:text-[17px] text-[var(--ink-2)] mb-14 max-w-lg leading-[1.8]">
             Roles and responsibilities across IT support, infrastructure, and development.
           </p>
         </Animblock>
 
-        <div>
-          {experience.map((exp, i) => (
-            <Animblock key={i} delay={i * 0.12}>
-              <Experiencerow exp={exp} isLast={i === experience.length - 1} />
-            </Animblock>
-          ))}
+        {/* Timeline */}
+        <div className="relative">
+          {/* vertical line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-[var(--accent)]/70 via-[var(--ink-3)]/40 to-transparent" />
+
+          <div>
+            {experience.map((exp, i) => (
+              <Animblock key={i} delay={(i % 2) * 0.07}>
+                <Experiencerow exp={exp} isLast={i === experience.length - 1} />
+              </Animblock>
+            ))}
+          </div>
         </div>
 
       </div>

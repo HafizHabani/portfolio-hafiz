@@ -1,4 +1,4 @@
-// src/components/Start.jsx
+// src/startup/Start.jsx
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import data from "../data/biodata";
@@ -6,348 +6,80 @@ import data from "../data/biodata";
 export default function Start() {
   const navigate = useNavigate();
 
+  const enter = () => navigate("/Dashboard");
+
   useEffect(() => {
-    // total sekuens 3s, tebasan 1 detik
-    const timer = setTimeout(() => navigate("/Dashboard"), 3500);
+    // short, calm intro — 1.2s, then in
+    const timer = setTimeout(() => navigate("/Dashboard"), 1200);
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  const sparks = Array.from({ length: 12 }).map((_, i) => {
-    const angle = (i / 12) * 360 + (i % 2 === 0 ? 10 : -6);
-    const dist = 50 + ((i * 37) % 60);
-    const dx = Math.cos((angle * Math.PI) / 180) * dist;
-    const dy = Math.sin((angle * Math.PI) / 180) * dist;
-    return { id: i, dx, dy, delay: 1.85 + i * 0.02 };
-  });
+  const words = data.name.split(" ");
+  const firstName = words.slice(0, 2).join(" ");
+  const lastName  = words.slice(2).join(" ");
 
   return (
-    <div style={s.stage}>
-
-      {/* Grid background */}
-      <div style={s.gridBg} />
-      <div style={s.scanline} />
-
-      {/* Corner brackets */}
-      <div style={{ ...s.corner, top: 20, left: 20, borderTop: "1px solid rgba(255,255,255,0.15)", borderLeft: "1px solid rgba(255,255,255,0.15)" }} />
-      <div style={{ ...s.corner, top: 20, right: 20, borderTop: "1px solid rgba(255,255,255,0.15)", borderRight: "1px solid rgba(255,255,255,0.15)" }} />
-      <div style={{ ...s.corner, bottom: 20, left: 20, borderBottom: "1px solid rgba(255,255,255,0.15)", borderLeft: "1px solid rgba(255,255,255,0.15)" }} />
-      <div style={{ ...s.corner, bottom: 20, right: 20, borderBottom: "1px solid rgba(255,255,255,0.15)", borderRight: "1px solid rgba(255,255,255,0.15)" }} />
-
-      {/* Dashboard peek */}
-      <div style={s.dashPeek}>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontFamily: "'Noto Serif JP', serif", fontSize: 64, fontWeight: 300, color: "rgba(0,0,0,0.06)", marginBottom: 8 }}>
-            {data.kanji}
-          </div>
-          <div style={{ fontFamily: "'Courier New', monospace", fontSize: 9, letterSpacing: 5, color: "#070707", textTransform: "uppercase" }}>
-            — dashboard loaded —
-          </div>
-        </div>
+    <div
+      className="relative min-h-screen cursor-pointer bg-[var(--page)] text-[var(--ink)] flex items-center justify-center"
+      onClick={enter}
+    >
+      {/* ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div
+          className="absolute -top-32 -right-24 w-[460px] h-[460px] rounded-full"
+          style={{ background: "radial-gradient(closest-side, var(--glow-a), transparent)", animation: "orbFloat 9s ease-in-out infinite" }}
+        />
+        <div
+          className="absolute -bottom-40 -left-24 w-[520px] h-[520px] rounded-full"
+          style={{ background: "radial-gradient(closest-side, var(--glow-b), transparent)", animation: "orbFloat2 11s ease-in-out infinite" }}
+        />
       </div>
 
-      {/* Kanji watermark */}
-      <div style={s.kanjiBg}>技</div>
-
-      {/* Center identity */}
-      <div style={s.centerContent}>
-        <div style={s.mainLabel}>portfolio</div>
-        <div style={s.mainName}>
-          {data.name.split(" ").map((w, i) => (
-            <span key={i} style={{ display: "block" }}>{w}</span>
-          ))}
+      <div className="relative text-center px-6">
+        <div
+          className="mono inline-flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase text-[var(--ink-2)] border border-[var(--line)] rounded-full px-4 py-1.5 mb-7"
+          style={{ animation: "fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both" }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--dot)]" style={{ animation: "pulseDot 1.8s ease-in-out infinite" }} />
+          {data.role}
         </div>
-        <div style={s.mainRole}>{data.role}</div>
 
-        {/* Wrapper tetap, dua teks status ditumpuk absolute di dalamnya — tidak saling ganggu posisi */}
-        <div style={s.statusWrap}>
-          <div style={s.statusText}>— ENTERING SYSTEM —</div>
-          <div style={s.statusText2}>— ACCESS GRANTED —</div>
+        <div
+          className="font-display text-[clamp(38px,8vw,84px)] font-medium tracking-[-0.03em] leading-[1.05] text-[var(--ink)]"
+          style={{ animation: "fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s both" }}
+        >
+          {firstName}
+          <span className="block gradient-text">{lastName}</span>
         </div>
-      </div>
 
-      {/* ── Katana slash — sekarang berlangsung 1 detik ── */}
-      <div style={s.bladeTrack}>
-        <div style={{ ...s.bladeGlow, filter: "blur(18px)", opacity: 0.22, width: 40, animation: "bladeSweep 1s cubic-bezier(0.45,0,0.4,1) 0.82s forwards" }} />
-        <div style={{ ...s.bladeGlow, filter: "blur(9px)", opacity: 0.35, width: 16, animation: "bladeSweep 1s cubic-bezier(0.45,0,0.4,1) 0.86s forwards" }} />
-        <div style={s.blade} />
-      </div>
-
-      {/* Seam glow — menyala saat bilah hampir tuntas menyayat */}
-      <div style={s.cutSeam} />
-
-      {/* Impact flash */}
-      <div style={s.flash} />
-
-      {/* Sparks */}
-      <div style={s.sparkOrigin}>
-        {sparks.map(sp => (
-          <span
-            key={sp.id}
+        <div
+          className="mx-auto mt-8 h-[3px] w-44 rounded-full bg-[var(--line-2)] overflow-hidden"
+          style={{ animation: "fadeUp 0.6s ease 0.35s both" }}
+        >
+          <div
+            className="h-full rounded-full"
             style={{
-              ...s.spark,
-              "--dx": `${sp.dx}px`,
-              "--dy": `${sp.dy}px`,
-              animation: `sparkBurst 0.55s ease-out ${sp.delay}s forwards`,
+              background: "linear-gradient(90deg,var(--lift),var(--accent))",
+              transformOrigin: "left",
+              animation: "introLine 1s cubic-bezier(0.4,0,0.2,1) 0.15s both",
             }}
           />
-        ))}
+        </div>
+
+        <div
+          className="mono text-[10px] tracking-[0.22em] uppercase text-[var(--ink-3)] mt-6"
+          style={{ animation: "fadeUp 0.6s ease 0.5s both" }}
+        >
+          click anywhere to enter
+        </div>
       </div>
 
-      {/* Split halves */}
-      <div style={{ ...s.half, clipPath: "polygon(0 0, 58% 0, 42% 100%, 0% 100%)", animation: "slideLeftCut 0.85s cubic-bezier(0.76,0,0.24,1) 1.95s forwards" }} />
-      <div style={{ ...s.half, clipPath: "polygon(58% 0, 100% 0, 100% 100%, 42% 100%)", animation: "slideRightCut 0.85s cubic-bezier(0.76,0,0.24,1) 1.95s forwards" }} />
-
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400&display=swap');
-
-        @keyframes gridShift {
-          to { transform: translateY(48px); }
-        }
-        @keyframes fadeIn {
-          to { opacity: 1; }
-        }
-        @keyframes fadeOut {
-          to { opacity: 0; }
-        }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(12px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes revealDash {
-          to { opacity: 1; }
-        }
-        @keyframes blink {
-          0%, 100% { opacity: 0.2; }
-          50%       { opacity: 0.5; }
-        }
-        @keyframes blinkThenFadeOut {
-          0%, 90%  { opacity: 0.35; }
-          45%      { opacity: 0.6; }
-          100%     { opacity: 0; }
-        }
-        @keyframes colorFlipToDark {
-          to { color: #111111; }
-        }
-
-        /* Bilah menyayat diagonal — 1 detik */
-        @keyframes bladeSweep {
-          0%   { transform: translateX(-50%) rotate(-12deg) translateY(-130%); opacity: 0; }
-          6%   { opacity: 1; }
-          88%  { opacity: 1; }
-          100% { transform: translateX(-50%) rotate(-12deg) translateY(130%); opacity: 0; }
-        }
-
-        @keyframes flashPulse {
-          0%   { opacity: 0; }
-          25%  { opacity: 0.85; }
-          100% { opacity: 0; }
-        }
-
-        @keyframes seamGlow {
-          0%   { opacity: 0; }
-          40%  { opacity: 1; }
-          100% { opacity: 0; }
-        }
-
-        @keyframes sparkBurst {
-          0%   { transform: translate(0,0) scale(1);   opacity: 1; }
-          100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
-        }
-
-        @keyframes slideLeftCut {
-          to { transform: translate(-115%, 12%) rotate(-4deg); }
-        }
-        @keyframes slideRightCut {
-          to { transform: translate(115%, -12%) rotate(4deg); }
-        }
-
-        @keyframes stageShake {
-          0%, 100% { transform: translate(0,0); }
-          20%  { transform: translate(-2px, 1px); }
-          40%  { transform: translate(2px, -1px); }
-          60%  { transform: translate(-1px, 2px); }
-          80%  { transform: translate(1px, -2px); }
+        @keyframes introLine {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
         }
       `}</style>
     </div>
   );
 }
-
-// ── Styles ──────────────────────────────────────────────────
-const s = {
-  stage: {
-    minHeight: "100vh",
-    background: "#060810",
-    position: "relative",
-    overflow: "hidden",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontFamily: "'Courier New', monospace",
-    cursor: "none",
-    animation: "stageShake 0.25s ease 1.8s",
-  },
-  gridBg: {
-    position: "absolute", inset: 0,
-    backgroundImage:
-      "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)," +
-      "linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-    backgroundSize: "48px 48px",
-    animation: "gridShift 10s linear infinite",
-  },
-  scanline: {
-    position: "absolute", inset: 0, pointerEvents: "none",
-    background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.008) 3px, rgba(255,255,255,0.008) 4px)",
-  },
-  corner: {
-    position: "absolute", width: 16, height: 16,
-  },
-
-  dashPeek: {
-    position: "absolute", inset: 0,
-    background: "#fafaf8",
-    zIndex: 1,
-    display: "flex", alignItems: "center", justifyContent: "center",
-    opacity: 0,
-    animation: "revealDash 0.6s ease 1.95s forwards",
-  },
-
-  kanjiBg: {
-    position: "absolute",
-    fontFamily: "'Noto Serif JP', serif",
-    fontSize: 200,
-    color: "rgba(255,255,255,0.025)",
-    top: "50%", left: "50%",
-    transform: "translate(-50%, -50%)",
-    userSelect: "none", pointerEvents: "none",
-    zIndex: 3, lineHeight: 1,
-  },
-
-  bladeTrack: {
-    position: "absolute",
-    inset: 0,
-    overflow: "hidden",
-    pointerEvents: "none",
-    zIndex: 25,
-  },
-  blade: {
-    position: "absolute",
-    top: "-20%", left: "50%",
-    width: 2, height: "160%",
-    background:
-      "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(220,230,255,0.9) 12%, #ffffff 50%, rgba(220,230,255,0.9) 88%, rgba(255,255,255,0) 100%)",
-    transform: "translateX(-50%) rotate(-12deg) translateY(-130%)",
-    boxShadow: "0 0 16px 3px rgba(255,255,255,0.7), 0 0 46px 8px rgba(180,200,255,0.3)",
-    animation: "bladeSweep 1s cubic-bezier(0.45,0,0.4,1) 0.9s forwards",
-  },
-  bladeGlow: {
-    position: "absolute",
-    top: "-20%", left: "50%",
-    height: "160%",
-    background:
-      "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0) 100%)",
-    opacity: 0,
-  },
-
-  cutSeam: {
-    position: "absolute",
-    top: 0, bottom: 0, left: "50%",
-    width: 3,
-    background: "#ffffff",
-    boxShadow: "0 0 24px 6px rgba(255,255,255,0.8)",
-    transform: "translateX(-50%) rotate(-12deg) scaleY(1.15)",
-    transformOrigin: "center",
-    opacity: 0,
-    zIndex: 22,
-    pointerEvents: "none",
-    animation: "seamGlow 0.35s ease 1.82s forwards",
-  },
-
-  flash: {
-    position: "absolute", inset: 0,
-    background: "#ffffff",
-    zIndex: 30,
-    pointerEvents: "none",
-    opacity: 0,
-    animation: "flashPulse 0.32s ease 1.75s forwards",
-  },
-
-  sparkOrigin: {
-    position: "absolute",
-    top: "50%", left: "50%",
-    width: 0, height: 0,
-    zIndex: 26,
-    pointerEvents: "none",
-  },
-  spark: {
-    position: "absolute",
-    top: 0, left: 0,
-    width: 3, height: 3,
-    borderRadius: "50%",
-    background: "#ffffff",
-    boxShadow: "0 0 6px 1px rgba(255,255,255,0.9)",
-    opacity: 0,
-  },
-
-  half: {
-    position: "absolute",
-    inset: 0,
-    background: "#060810",
-    zIndex: 20,
-    animationFillMode: "forwards",
-  },
-
-  centerContent: {
-    position: "relative",
-    zIndex: 5,
-    textAlign: "center",
-    opacity: 0,
-    animation: "fadeIn 0.4s ease 0.3s forwards",
-  },
-  mainLabel: {
-    fontSize: 10, letterSpacing: 8,
-    color: "rgba(255,255,255,0.35)",
-    textTransform: "uppercase",
-    marginBottom: 12,
-    animation: "fadeUp 0.5s 0.4s ease both, colorFlipToDark 0.4s ease 1.95s forwards",
-  },
-  mainName: {
-    fontFamily: "'Noto Serif JP', serif",
-    fontSize: 28, fontWeight: 300,
-    color: "#ffffff",
-    letterSpacing: -0.5,
-    lineHeight: 1.3,
-    animation: "fadeUp 0.5s 0.5s ease both, colorFlipToDark 0.4s ease 1.95s forwards",
-  },
-  mainRole: {
-    fontSize: 9, letterSpacing: 5,
-    color: "rgba(255,255,255,0.3)",
-    textTransform: "uppercase",
-    margin: "28px auto 0",
-    marginTop: 10,
-    animation: "fadeUp 0.5s 0.6s ease both, colorFlipToDark 0.4s ease 1.95s forwards",
-  },
-  statusWrap: {
-    position: "relative",
-    height: 14,
-    marginTop: 20,
-    animation: "fadeUp 0.5s 0.8s ease both",
-  },
-  statusText: {
-    position: "absolute",
-    top: 0, left: 0, right: 0,
-    fontSize: 9, letterSpacing: 4,
-    color: "rgba(255,255,255,0.35)",
-    textAlign: "center",
-    animation: "blinkThenFadeOut 1.15s 0.8s ease forwards",
-  },
-  statusText2: {
-    position: "absolute",
-    top: 0, left: 0, right: 0,
-    fontSize: 9, letterSpacing: 4,
-    color: "rgba(17,17,17,0.5)",
-    textAlign: "center",
-    opacity: 0,
-    animation: "fadeUp 0.4s 1.95s ease forwards",
-  },
-};

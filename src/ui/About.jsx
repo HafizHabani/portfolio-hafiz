@@ -5,70 +5,64 @@ export default function About({ data }) {
   return (
     <section
       id="about"
-      className="px-6 md:px-12 py-10 md:py-14 bg-[#F1F6F9] border-t border-[#9BA4B5]/30 relative"
+      className="relative px-5 sm:px-8 md:px-12 py-20 md:py-28 bg-[var(--page)] border-t border-[var(--line)]"
     >
-      <div className="max-w-[1100px] mx-auto">
+      <div className="max-w-[1120px] mx-auto">
 
-        {/* Section label */}
         <Animblock>
-          <div className="font-mono text-[12px] sm:text-[13px] tracking-[0.4em] text-[#394867] mb-10 uppercase">
-            01 &nbsp;/&nbsp; About
+          <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--accent)] mb-4">
+            01 / About
           </div>
         </Animblock>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-14 lg:gap-16 items-start mt-4">
 
           {/* Left — bio */}
           <Animblock>
-            <h2 className="font-serif font-light text-[38px] md:text-[46px] tracking-[-0.02em] leading-[1.15] mb-6 text-[#212A3E]">
-              About Me.
+            <h2 className="font-display font-semibold text-[36px] md:text-[46px] tracking-[-0.03em] leading-[1.1] mb-7 text-[var(--ink)]">
+              A bit<br />about me.
             </h2>
-            <p className="font-mono text-[15px] md:text-[16px] leading-[1.9] text-[#394867]">
+            <p className="font-sans text-[16px] md:text-[17px] leading-[1.85] text-[var(--ink-2)] max-w-[58ch]">
               {data.bio}
             </p>
 
             {/* Quick info pills */}
-            <div className="flex flex-wrap gap-2 mt-8">
+            <div className="flex flex-wrap gap-2.5 mt-9">
               {[data.role, data.contact.location, "Open to Work"].map(label => (
-                <span
-                  key={label}
-                  className="font-mono text-[12px] tracking-[0.08em] px-3.5 py-2 border border-[#9BA4B5]/50 text-[#394867]"
-                >
+                <span key={label} className="chip">
                   {label}
                 </span>
               ))}
             </div>
           </Animblock>
 
-          {/* Right — identity table */}
-          <Animblock delay={0.2}>
-            <div className="border border-[#9BA4B5]/40 p-8 md:p-12 relative h-full flex flex-col justify-center">
-
-              {/* Card label */}
-              <div className="absolute -top-px right-10 bg-[#F1F6F9] px-3 font-mono text-[11px] tracking-[0.2em] text-[#394867] uppercase">
-                Identity
-              </div>
-
-              {/* Rows */}
+          {/* Right — identity card */}
+          <Animblock delay={0.15}>
+            <div className="glass rounded-3xl p-8 md:p-10">
+              <div className="label mb-7 text-[var(--ink-3)]">Identity</div>
               {[
                 ["Name",     data.name],
                 ["Role",     data.role],
                 ["Location", data.contact.location],
                 ["Status",   "Open to Work"],
                 ["Email",    data.contact.email],
-              ].map(([k, v]) => (
-                <div key={k} className="flex justify-between items-start py-4 border-b border-[#9BA4B5]/20 last:border-0 gap-4">
-                  <span className="font-mono text-[12px] tracking-[0.15em] text-[#9BA4B5] uppercase shrink-0">
+              ].map(([k, v], i) => (
+                <div
+                  key={k}
+                  className={`flex justify-between items-baseline gap-4 py-3.5 ${i < 4 ? "border-b border-[var(--line-2)]" : ""}`}
+                >
+                  <span className="mono text-[11px] tracking-[0.12em] text-[var(--ink-3)] uppercase shrink-0">
                     {k}
                   </span>
-                  <span className="font-mono text-[14px] text-[#212A3E] tracking-[0.01em] text-right break-all">
+                  <span className="font-sans text-[14px] text-[var(--ink)] tracking-[0.01em] text-right break-all">
                     {v}
                   </span>
                 </div>
               ))}
 
-              <div className="mt-8 w-10 h-10 border border-[#212A3E] flex items-center justify-center text-lg font-serif text-[#212A3E]">
-                ✦
+              <div className="mt-8 flex items-center gap-3" aria-hidden>
+                <span className="h-[3px] w-9 rounded-full bg-[var(--accent)]" />
+                <span className="mono text-[10px] tracking-[0.16em] uppercase text-[var(--ink-3)]">{data.role}</span>
               </div>
             </div>
           </Animblock>

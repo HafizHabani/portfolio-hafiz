@@ -9,7 +9,7 @@ import { useRef } from "react";
  * - label : small tag drawn top-left, e.g. "UI Web" / "UI Android"
  * - height: fixed viewport height for the frame (px)
  */
-export default function ScrollPreview({ src, label, className = "", height = 420 }) {
+export default function ScrollPreview({ src, label, className = "", height = 360 }) {
   const imgRef = useRef(null);
 
   const handleEnter = () => {
@@ -34,21 +34,21 @@ export default function ScrollPreview({ src, label, className = "", height = 420
   return (
     <div
       className={`relative overflow-hidden ${className}`}
-      style={{ background: "#F1F6F9", height, cursor: "ns-resize" }}
+      style={{ background: "var(--surface)", height, cursor: "ns-resize" }}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
       <span
-        className="absolute top-3 left-3 z-10 font-mono text-[10px] tracking-[0.2em] uppercase px-2 py-1"
-        style={{ background: "#212A3E", color: "#F1F6F9" }}
+        className="absolute top-3 left-3 z-10 mono text-[10px] tracking-[0.12em] uppercase px-2.5 py-1 rounded-md"
+        style={{ background: "var(--page-80)", color: "var(--ink-2)", backdropFilter: "blur(6px)", border: "1px solid var(--line)" }}
       >
         {label}
       </span>
 
-      {/* scroll affordance, mirrors the little arrow in the sketch */}
+      {/* scroll affordance */}
       <span
-        className="absolute bottom-3 right-3 z-10 font-mono text-[13px]"
-        style={{ color: "#394867" }}
+        className="absolute bottom-3 right-3 z-10 mono text-[13px]"
+        style={{ color: "var(--accent)" }}
       >
         ↕
       </span>
