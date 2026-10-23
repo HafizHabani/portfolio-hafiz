@@ -1,8 +1,8 @@
 // src/ui/Hero.jsx
 import { useState } from "react";
 import me1 from "../assets/png/Me.png";
-import me2 from "../assets/png/Me2.png";
-import me3 from "../assets/png/Me3.png";
+import me2 from "../assets/png/Me2.jpg";
+import me3 from "../assets/png/Me3.jpg";
 import cvPdf from "../assets/pdf/CV Indonesia.pdf";
 import { FiDownload, FiArrowUpRight, FiCopy, FiCheck, FiServer, FiCode, FiWifi } from "react-icons/fi";
 
