@@ -4,11 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        base:   "#0A0A0A",   // page canvas — near-black
-        panel:  "#111113",   // card surface
-        lift:   "#2B2B31",   // elevated surface
-        accent: "#8E8E97",   // silver — interactive
-        viola:  "#4A4A52",   // mid grey
+        base:    "#050505",   // Jett black — page canvas
+        jett:    "#050505",   // Jett black
+        silver:  "#C0C0C0",   // Moonlit Silver
+        cobalt:  "#2C3480",   // Cobalt Blue Deep
+        panel:   "#0A0B10",   // card surface
+        lift:    "#181B36",   // elevated surface
+        accent:  "#2C3480",   // Cobalt Blue Deep — interactive
+        viola:   "#4A4A52",   // mid grey
       },
       fontFamily: {
         display: ["Space Grotesk", "Inter", "system-ui", "sans-serif"],

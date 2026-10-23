@@ -1,5 +1,5 @@
 // src/ui/Experience.jsx
-import Animblock     from "../function/Animblock";
+import Animblock from "../function/Animblock";
 import Experiencerow from "../function/Experiencerow";
 
 export default function Experience({ experience }) {
@@ -9,27 +9,32 @@ export default function Experience({ experience }) {
       className="px-5 sm:px-8 md:px-12 py-20 md:py-28 bg-[var(--surface)] border-t border-[var(--line)]"
     >
       <div className="max-w-[1120px] mx-auto">
-
+        
+        {/* Header */}
         <Animblock>
-          <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--accent)] mb-4">
-            My Work Experience
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div>
+              <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--accent)] mb-3">
+                04 / Career Roadmap
+              </div>
+              <h2 className="font-display font-bold text-[34px] sm:text-[44px] md:text-[50px] tracking-tight leading-[1.08] text-[var(--ink)]">
+                Work <span className="gradient-text">Journey.</span>
+              </h2>
+            </div>
+            <p className="font-sans text-[16px] text-[var(--ink-2)] max-w-md leading-relaxed">
+              Proven track record across corporate IT operations, government portal frontend engineering, and independent hardware services.
+            </p>
           </div>
-          <h2 className="font-display font-semibold text-[36px] md:text-[46px] tracking-[-0.03em] leading-[1.1] text-[var(--ink)] mb-4">
-            Where I've worked.
-          </h2>
-          <p className="font-sans text-[16px] md:text-[17px] text-[var(--ink-2)] mb-14 max-w-lg leading-[1.8]">
-            Roles and responsibilities across IT support, infrastructure, and development.
-          </p>
         </Animblock>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* vertical line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-gradient-to-b from-[var(--accent)]/70 via-[var(--ink-3)]/40 to-transparent" />
+        {/* Timeline Container */}
+        <div className="relative max-w-3xl mx-auto">
+          {/* Vertical spine line */}
+          <div className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-[var(--accent)] via-[var(--line)] to-transparent" />
 
-          <div>
+          <div className="space-y-2">
             {experience.map((exp, i) => (
-              <Animblock key={i} delay={(i % 2) * 0.07}>
+              <Animblock key={exp.company + i} delay={(i % 2) * 0.06}>
                 <Experiencerow exp={exp} isLast={i === experience.length - 1} />
               </Animblock>
             ))}

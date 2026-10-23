@@ -1,6 +1,6 @@
 // src/ui/Skills.jsx
 import Animblock from "../function/Animblock";
-import Skillbar  from "../function/Skillbar";
+import Skillbar from "../function/Skillbar";
 
 export default function Skills({ skills }) {
   return (
@@ -8,31 +8,36 @@ export default function Skills({ skills }) {
       id="skills"
       className="px-5 sm:px-8 md:px-12 py-20 md:py-28 bg-[var(--surface)] border-t border-[var(--line)] relative overflow-hidden"
     >
-      {/* faint center glow */}
+      {/* Ambient center backlight */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[680px] h-[320px] rounded-full pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[360px] rounded-full pointer-events-none opacity-40"
         style={{ background: "radial-gradient(closest-side, var(--glow-a), transparent)" }}
       />
 
       <div className="max-w-[1120px] mx-auto relative z-10">
-
-        {/* Heading — centered, Binjan style */}
+        
+        {/* Section Heading */}
         <Animblock>
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--ink-3)] mb-4">
-              My Services
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div>
+              <div className="mono text-[12px] tracking-[0.18em] uppercase text-[var(--accent)] mb-3">
+                02 / Technical Skills
+              </div>
+              <h2 className="font-display font-bold text-[34px] sm:text-[44px] md:text-[50px] tracking-tight leading-[1.08] text-[var(--ink)]">
+                Technical <span className="gradient-text">Capabilities.</span>
+              </h2>
             </div>
-            <h2 className="font-display font-semibold text-[36px] md:text-[46px] tracking-[-0.03em] leading-[1.1] text-[var(--ink)]">
-              What do I <span className="gradient-text">help</span> you with?
-            </h2>
+            <p className="font-sans text-[16px] text-[var(--ink-2)] max-w-md leading-relaxed">
+              Curated toolset and technologies leveraged across production systems, enterprise networks, and web development.
+            </p>
           </div>
         </Animblock>
 
-        {/* Cards */}
+        {/* 4-column modern card grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {skills.map((skill, i) => (
             <Animblock key={skill.cat} delay={i * 0.08}>
-              <Skillbar skill={skill} index={i} />
+              <Skillbar skill={skill} delay={i * 0.08} />
             </Animblock>
           ))}
         </div>

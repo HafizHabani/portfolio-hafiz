@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import data from "../data/biodata";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function Start() {
   const navigate = useNavigate();
@@ -9,68 +10,91 @@ export default function Start() {
   const enter = () => navigate("/Dashboard");
 
   useEffect(() => {
-    // short, calm intro — 1.2s, then in
-    const timer = setTimeout(() => navigate("/Dashboard"), 1200);
+    // Quick calm loader — 1.1s, then automatic transition
+    const timer = setTimeout(() => navigate("/Dashboard"), 1100);
     return () => clearTimeout(timer);
   }, [navigate]);
 
   const words = data.name.split(" ");
   const firstName = words.slice(0, 2).join(" ");
-  const lastName  = words.slice(2).join(" ");
+  const lastName = words.slice(2).join(" ");
 
   return (
     <div
-      className="relative min-h-screen cursor-pointer bg-[var(--page)] text-[var(--ink)] flex items-center justify-center"
+      className="relative min-h-screen cursor-pointer bg-[var(--page)] text-[var(--ink)] flex flex-col items-center justify-center overflow-hidden select-none"
       onClick={enter}
     >
-      {/* ambient orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute -top-32 -right-24 w-[460px] h-[460px] rounded-full"
-          style={{ background: "radial-gradient(closest-side, var(--glow-a), transparent)", animation: "orbFloat 9s ease-in-out infinite" }}
-        />
-        <div
-          className="absolute -bottom-40 -left-24 w-[520px] h-[520px] rounded-full"
-          style={{ background: "radial-gradient(closest-side, var(--glow-b), transparent)", animation: "orbFloat2 11s ease-in-out infinite" }}
-        />
-      </div>
+      {/* Ambient background light */}
+      <div
+        className="absolute top-1/4 -right-24 w-[500px] h-[500px] rounded-full pointer-events-none opacity-40"
+        style={{
+          background: "radial-gradient(closest-side, var(--glow-a), transparent)",
+          animation: "orbFloat 10s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="absolute bottom-1/4 -left-24 w-[500px] h-[500px] rounded-full pointer-events-none opacity-30"
+        style={{
+          background: "radial-gradient(closest-side, var(--glow-b), transparent)",
+          animation: "orbFloat2 12s ease-in-out infinite",
+        }}
+      />
 
-      <div className="relative text-center px-6">
+      {/* Modern subtle grid */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          maskImage: "radial-gradient(circle at 50% 50%, #000 50%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(circle at 50% 50%, #000 50%, transparent 100%)",
+        }}
+      />
+
+      <div className="relative z-10 text-center px-6 max-w-lg mx-auto">
+        {/* Role Pill */}
         <div
-          className="mono inline-flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase text-[var(--ink-2)] border border-[var(--line)] rounded-full px-4 py-1.5 mb-7"
+          className="mono inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[var(--ink-2)] border border-[var(--line)] bg-[var(--card)]/80 backdrop-blur-md rounded-full px-4 py-1.5 mb-8 shadow-lg"
           style={{ animation: "fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both" }}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--dot)]" style={{ animation: "pulseDot 1.8s ease-in-out infinite" }} />
-          {data.role}
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]" />
+          </span>
+          {data.role} · Palangkaraya
         </div>
 
+        {/* Name */}
         <div
-          className="font-display text-[clamp(38px,8vw,84px)] font-medium tracking-[-0.03em] leading-[1.05] text-[var(--ink)]"
+          className="font-display text-[clamp(38px,7.5vw,76px)] font-bold tracking-tight leading-[1.05] text-[var(--ink)] mb-8"
           style={{ animation: "fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s both" }}
         >
           {firstName}
-          <span className="block gradient-text">{lastName}</span>
+          <span className="block gradient-text italic font-medium">{lastName}</span>
         </div>
 
+        {/* Loading progress bar */}
         <div
-          className="mx-auto mt-8 h-[3px] w-44 rounded-full bg-[var(--line-2)] overflow-hidden"
+          className="mx-auto h-[3px] w-48 rounded-full bg-[var(--line)] overflow-hidden"
           style={{ animation: "fadeUp 0.6s ease 0.35s both" }}
         >
           <div
-            className="h-full rounded-full"
+            className="h-full rounded-full bg-gradient-to-r from-[var(--lift)] via-[var(--accent)] to-[var(--accent-silver)]"
             style={{
-              background: "linear-gradient(90deg,var(--lift),var(--accent))",
               transformOrigin: "left",
-              animation: "introLine 1s cubic-bezier(0.4,0,0.2,1) 0.15s both",
+              animation: "introLine 1.1s cubic-bezier(0.4,0,0.2,1) both",
             }}
           />
         </div>
 
+        {/* Prompt */}
         <div
-          className="mono text-[10px] tracking-[0.22em] uppercase text-[var(--ink-3)] mt-6"
+          className="inline-flex items-center gap-1.5 mono text-[11px] tracking-[0.16em] uppercase text-[var(--ink-3)] mt-7 hover:text-[var(--accent)] transition-colors"
           style={{ animation: "fadeUp 0.6s ease 0.5s both" }}
         >
-          click anywhere to enter
+          <span>Tap anywhere to enter</span>
+          <FiArrowRight size={12} />
         </div>
       </div>
 

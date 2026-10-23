@@ -24,7 +24,7 @@ export default function Dashboard() {
     document.documentElement.setAttribute("data-theme", theme);
     if (typeof localStorage !== "undefined") localStorage.setItem("pf-theme", theme);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === "dark" ? "#0A0A0A" : "#F6F6F7";
+    if (meta) meta.content = theme === "dark" ? "#050505" : "#F6F6F7";
   }, [theme]);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
@@ -76,6 +76,8 @@ export default function Dashboard() {
         activeNav={activeNav}
         scrollY={scrollY}
         onNav={scrollTo}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       <Hero     data={data} theme={theme} onToggleTheme={toggleTheme} />

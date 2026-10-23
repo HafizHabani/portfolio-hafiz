@@ -7,9 +7,22 @@
 // Preview screenshots dipakai di section Projects (panel "UI Web" / "UI Android").
 // Taruh file barumu di folder yang sama lalu import di sini, contoh:
 //   import previewWebFoodlink from "../assets/preview/web/foodlink.jpg";
-import previewWebSpbe from "../assets/preview/web/spbe-malang.jpg";
-import previewWebSpbebe from "../assets/preview/web/spbe-malang-be.png";
-import previewAndroidSpbe from "../assets/preview/android/spbe-malang.jpg";
+import previewWebSpbeFe from "../assets/preview/web/spbe-malang-fe.jpg";
+import previewWebSpbeBe from "../assets/preview/web/spbe-malang-be.jpg";
+import previewAndroidSpbeFe from "../assets/preview/android/spbe-malang-fe.jpg";
+import previewAndroidSpbeBe from "../assets/preview/android/spbe-malang-be.jpg";
+import previewWebFoodlinkFe from "../assets/preview/web/foodlink-fe.jpg";
+import previewWebFoodlinkBe from "../assets/preview/web/foodlink-be.jpg";
+import previewAndroidFoodlinkFe from "../assets/preview/android/foodlink-fe.jpg";
+import previewAndroidFoodlinkBe from "../assets/preview/android/foodlink-be.jpg";
+import previewWebJarangFe from "../assets/preview/web/jarang-fe.jpg";
+import previewWebJarangBe from "../assets/preview/web/jarang-be.jpg";
+import previewAndroidJarangFe from "../assets/preview/android/jarang-fe.jpg";
+import previewAndroidJarangBe from "../assets/preview/android/jarang-be.jpg";
+import previewWebSiskamlingFe from "../assets/preview/web/siskamling-fe.jpg";
+import previewWebSiskamlingBe from "../assets/preview/web/siskamling-be.jpg";
+import previewAndroidSiskamlingFe from "../assets/preview/android/siskamling-fe.jpg";
+import previewAndroidSiskamlingBe from "../assets/preview/android/siskamling-be.jpg";
 
 const data = {
   name: "Muhammad Hafiz Habani Nelwan",
@@ -81,8 +94,8 @@ const data = {
     tags: ["React.js", "Tailwind CSS", "Vite"],
     year: "2024",
     link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.malang.git",
-    previewWeb: previewWebSpbe,
-    previewAndroid: previewAndroidSpbe
+    previewWeb: previewWebSpbeFe,
+    previewAndroid: previewAndroidSpbeFe
   },
   {
     id: "02",
@@ -91,7 +104,8 @@ const data = {
     tags: ["Laravel", "REST API", "MySQL"],
     year: "2024",
     link: "https://github.com/HafizHabani/Intern_Project_SPBE-Kab.Malang-Be.git",
-    previewWeb: previewWebSpbebe,
+    previewWeb: previewWebSpbeBe,
+    previewAndroid: previewAndroidSpbeBe,
   },
   {
     id: "03",
@@ -99,31 +113,59 @@ const data = {
     desc: "Canteen management platform with food ordering, dashboard, and responsive React interface.",
     tags: ["React.js", "JavaScript", "Tailwind CSS"],
     year: "2024",
-    link: "https://github.com/HafizHabani/Massive_Project_Foodlink-Fe.git"
+    link: "https://github.com/HafizHabani/Massive_Project_Foodlink-Fe.git",
+    previewWeb: previewWebFoodlinkFe,
+    previewAndroid: previewAndroidFoodlinkFe
   },
   {
     id: "04",
     name: "Foodlink (Backend)",
-    desc: "Laravel backend powering ordering, inventory, payments, and reporting through REST APIs.",
-    tags: ["Laravel", "REST API", "MySQL"],
+    desc: "Express + Sequelize backend powering ordering, authentication, payments, and admin panel through REST APIs.",
+    tags: ["Node.js", "Express", "MySQL"],
     year: "2023",
-    link: "https://github.com/HafizHabani/Massive_Project_Foodlink-Be.git"
+    link: "https://github.com/HafizHabani/Massive_Project_Foodlink-Be.git",
+    previewWeb: previewWebFoodlinkBe,
+    previewAndroid: previewAndroidFoodlinkBe
   },
   {
     id: "05",
-    name: "JaRang",
-    desc: "Logistics administration system for shipment tracking, customer management, and operational workflows.",
-    tags: ["PHP", "MySQL", "JavaScript"],
+    name: "JaRang (Frontend)",
+    desc: "Shipping service landing page with pick-up location, shipment tracking, pricing plans, and responsive contact form.",
+    tags: ["PHP", "Bootstrap", "JavaScript"],
     year: "2024",
-    link: "https://github.com/HafizHabani/Raw_Project_JaRang.git"
+    link: "https://github.com/HafizHabani/Raw_Project_JaRang.git",
+    previewWeb: previewWebJarangFe,
+    previewAndroid: previewAndroidJarangFe
   },
   {
     id: "06",
-    name: "SISKAMLING",
-    desc: "Neighborhood security management system with patrol scheduling, reporting, and attendance tracking.",
-    tags: ["PHP", "MySQL", "JavaScript"],
+    name: "JaRang (Backend)",
+    desc: "Admin dashboard with CRUD tables for shipments, senders, receivers, packaging, payments, and delivery tracking.",
+    tags: ["PHP", "MySQL", "Bootstrap"],
+    year: "2024",
+    link: "https://github.com/HafizHabani/Raw_Project_JaRang.git",
+    previewWeb: previewWebJarangBe,
+    previewAndroid: previewAndroidJarangBe
+  },
+  {
+    id: "07",
+    name: "SISKAMLING (Frontend)",
+    desc: "Neighborhood security management system with patrol scheduling, crime reporting, and attendance tracking for officers and residents.",
+    tags: ["HTML5", "Bootstrap", "JavaScript"],
     year: "2023",
-    link: "https://github.com/HafizHabani/Raw_Project_SISKAMLING.git"
+    link: "https://github.com/HafizHabani/Raw_Project_SISKAMLING.git",
+    previewWeb: previewWebSiskamlingFe,
+    previewAndroid: previewAndroidSiskamlingFe
+  },
+  {
+    id: "08",
+    name: "SISKAMLING (Backend)",
+    desc: "Admin dashboard with data tables for officer management, attendance records, patrol schedules, and resident crime reports.",
+    tags: ["HTML5", "Bootstrap", "JavaScript"],
+    year: "2023",
+    link: "https://github.com/HafizHabani/Raw_Project_SISKAMLING.git",
+    previewWeb: previewWebSiskamlingBe,
+    previewAndroid: previewAndroidSiskamlingBe
   }
 ],
 

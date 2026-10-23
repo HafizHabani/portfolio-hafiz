@@ -1,88 +1,159 @@
 // src/function/ProjectGridCard.jsx
+import { useState } from "react";
 import ScrollPreview from "./ScrollPreview";
 import { techIcon } from "../data/techIcons";
+import { FiArrowUpRight, FiMonitor, FiSmartphone, FiGithub } from "react-icons/fi";
 
-// rotate accent tints per card, keeping the theme palette
-const BLOCKS = [
-  "linear-gradient(150deg, var(--glow-b), var(--line-2))",
-  "linear-gradient(150deg, var(--ink-3), var(--line-2))",
-  "linear-gradient(150deg, var(--accent-h), var(--line-2))",
-  "linear-gradient(150deg, var(--accent), var(--line-2))",
-];
+const SIMULATED_DOMAINS = {
+  "01": "spbe.malangkab.go.id/portal",
+  "02": "api.spbe.malangkab.go.id/v1",
+  "03": "foodlink.app/canteen-order",
+  "04": "api.foodlink.app/admin",
+  "05": "jarang.delivery/tracking",
+  "06": "admin.jarang.delivery/dashboard",
+  "07": "siskamling.desa.id/patrol",
+  "08": "admin.siskamling.desa.id/records",
+};
 
-export default function ProjectGridCard({ project, index, total }) {
-  const hasPreview = Boolean(project.previewWeb || project.previewAndroid);
-  const block = BLOCKS[index % BLOCKS.length];
+export default function ProjectGridCard({ project }) {
+  const hasBoth = Boolean(project.previewWeb && project.previewAndroid);
+  const [viewMode, setViewMode] = useState(project.previewWeb ? "web" : "android");
+
+  const currentPreview =
+    viewMode === "android" && project.previewAndroid
+      ? project.previewAndroid
+      : project.previewWeb || project.previewAndroid;
+
+  const currentLabel = viewMode === "android" ? "UI Android" : "UI Web";
+  const domain = SIMULATED_DOMAINS[project.id] || "github.com/HafizHabani";
 
   return (
-    <article className="group flex flex-col h-full rounded-3xl border border-[var(--card-border)] bg-[var(--card)] hover:bg-[var(--card-h)] hover:border-[var(--chip-hover-line)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden">
+    <article className="group flex flex-col h-full rounded-3xl border border-[var(--card-border)] bg-[var(--card)] hover:border-[var(--chip-hover-line)] hover:bg-[var(--card-h)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden shadow-lg">
+      
+      {/* Mockup Window Chrome */}
+      <div className="px-4 py-3 bg-[var(--surface)] border-b border-[var(--line)] flex items-center justify-between gap-3">
+        {/* Window control dots */}
+        <div className="flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]/80" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]/80" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]/80" />
+        </div>
 
-      {/* Color-blocked preview header */}
-      <div className="p-3" style={{ background: block }}>
-        {hasPreview ? (
-          <div className="flex gap-1 rounded-2xl overflow-hidden">
-            {project.previewWeb && (
-              <ScrollPreview
-                src={project.previewWeb}
-                label="UI Web"
-                className="flex-[1.6]"
-              />
-            )}
-            {project.previewAndroid && (
-              <ScrollPreview
-                src={project.previewAndroid}
-                label="UI Android"
-                className="flex-[0.85]"
-              />
-            )}
+        {/* Simulated URL pill */}
+        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[var(--page)]/70 border border-[var(--line-2)] text-[11px] mono text-[var(--ink-3)] max-w-[240px] truncate">
+          <span className="text-[var(--accent)] text-[10px]">https://</span>
+          <span className="truncate">{domain}</span>
+        </div>
+
+        {/* View Switcher Tabs (if both exist) */}
+        {hasBoth ? (
+          <div className="flex items-center gap-1 bg-[var(--page)]/80 p-0.5 rounded-lg border border-[var(--line-2)]">
+            <button
+              onClick={() => setViewMode("web")}
+              className={`
+                flex items-center gap-1 px-2 py-0.5 rounded text-[10px] mono transition-all cursor-pointer border-none
+                ${
+                  viewMode === "web"
+                    ? "bg-[var(--accent)] text-white font-medium"
+                    : "text-[var(--ink-3)] hover:text-[var(--ink)] bg-transparent"
+                }
+              `}
+              title="Switch to Web UI preview"
+            >
+              <FiMonitor size={11} />
+              <span className="hidden xs:inline">Web</span>
+            </button>
+            <button
+              onClick={() => setViewMode("android")}
+              className={`
+                flex items-center gap-1 px-2 py-0.5 rounded text-[10px] mono transition-all cursor-pointer border-none
+                ${
+                  viewMode === "android"
+                    ? "bg-[var(--accent)] text-white font-medium"
+                    : "text-[var(--ink-3)] hover:text-[var(--ink)] bg-transparent"
+                }
+              `}
+              title="Switch to Android UI preview"
+            >
+              <FiSmartphone size={11} />
+              <span className="hidden xs:inline">App</span>
+            </button>
           </div>
         ) : (
-          <div className="h-40 rounded-2xl flex items-center justify-center border border-[var(--line)] bg-[var(--card)]/40">
-            <span className="font-display text-[40px] font-semibold text-[var(--ink-3)]">
-              {project.id}
-            </span>
+          <span className="mono text-[10px] text-[var(--ink-3)] uppercase tracking-wider">
+            {currentLabel}
+          </span>
+        )}
+      </div>
+
+      {/* Frame with ScrollPreview */}
+      <div className="relative bg-[var(--surface)] overflow-hidden">
+        {currentPreview ? (
+          <ScrollPreview
+            src={currentPreview}
+            label={currentLabel}
+            height={320}
+            className="w-full"
+          />
+        ) : (
+          <div className="h-64 flex items-center justify-center bg-[var(--surface)] text-[var(--ink-3)] mono text-[13px]">
+            No Preview Available
           </div>
         )}
       </div>
 
-      {/* header row */}
-      <header className="flex items-start justify-between gap-3 px-6 pt-6 pb-4">
-        <div className="min-w-0">
-          <span className="mono text-[11px] tracking-[0.1em] text-[var(--ink-3)]">
-            {project.id} <span className="text-[var(--accent)]">/</span> {String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")} <span className="text-[var(--accent)]">·</span> {project.year}
-          </span>
-          <h3 className="font-display text-[19px] md:text-[22px] font-medium text-[var(--ink)] tracking-[-0.01em] leading-[1.25] mt-1.5 group-hover:text-[var(--ink)] transition-colors duration-300">
+      {/* Content Body */}
+      <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+        <div>
+          {/* Metadata Row */}
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-2">
+              <span className="mono text-[11px] font-semibold text-[var(--accent)] px-2 py-0.5 rounded-md bg-[var(--surface)] border border-[var(--line)]">
+                {project.id}
+              </span>
+              <span className="mono text-[11px] text-[var(--ink-3)]">
+                {project.year}
+              </span>
+            </div>
+
+            <a
+              href={project.link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open repository: ${project.name}`}
+              className="inline-flex items-center gap-1 text-[12px] mono text-[var(--accent)] hover:text-[var(--accent-h)] hover:underline underline-offset-4 transition-colors"
+            >
+              <FiGithub size={13} />
+              <span>Source</span>
+              <FiArrowUpRight size={13} />
+            </a>
+          </div>
+
+          {/* Title */}
+          <h3 className="font-display text-[20px] sm:text-[22px] font-semibold text-[var(--ink)] tracking-tight leading-snug group-hover:text-[var(--accent)] transition-colors duration-200 mb-3">
             {project.name}
           </h3>
+
+          {/* Description */}
+          <p className="font-sans text-[14px] leading-relaxed text-[var(--ink-2)] mb-5">
+            {project.desc}
+          </p>
         </div>
-        <a
-          href={project.link || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open repository: ${project.name}`}
-          className="w-9 h-9 shrink-0 mt-0.5 rounded-full border border-[var(--line)] flex items-center justify-center text-[var(--ink-3)] hover:text-[var(--ink)] hover:border-transparent hover:bg-[var(--card-h)] transition-all duration-300"
-        >
-          <span className="text-[15px] leading-none">↗</span>
-        </a>
-      </header>
 
-      {/* description */}
-      <p className="font-sans text-[13px] leading-[1.85] text-[var(--ink-2)] px-6">
-        {project.desc}
-      </p>
-
-      {/* tags */}
-      <div className="flex flex-wrap gap-2 px-6 py-5 mt-auto">
-        {project.tags.map((t) => {
-          const Icon = techIcon(t);
-          return (
-            <span key={t} className="chip">
-              {Icon ? <Icon size={12} /> : null}
-              {t}
-            </span>
-          );
-        })}
+        {/* Tech Stack Chips */}
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--line-2)] mt-auto">
+          {project.tags.map((t) => {
+            const Icon = techIcon(t);
+            return (
+              <span key={t} className="chip">
+                {Icon ? <Icon size={12} className="text-[var(--accent)]" /> : null}
+                <span>{t}</span>
+              </span>
+            );
+          })}
+        </div>
       </div>
+
     </article>
   );
 }
