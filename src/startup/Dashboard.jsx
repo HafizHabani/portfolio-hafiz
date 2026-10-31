@@ -80,7 +80,7 @@ export default function Dashboard() {
         onToggleTheme={toggleTheme}
       />
 
-      <Hero     data={data} theme={theme} onToggleTheme={toggleTheme} />
+      <Hero     data={data}                                  />
       <About    data={data}                                  />
       <Skills   skills={data.skills}                         />
       <Projects projects={data.projects}                     />

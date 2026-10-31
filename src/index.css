@@ -98,21 +98,8 @@
 
 
 /* ============================================================
-   THEME TRANSITION — smooth, everywhere, cheap properties only
+   THEME TRANSITION
    ============================================================ */
-html,
-body,
-nav,
-section,
-article,
-div,
-span,
-p,
-a,
-h1, h2, h3, h4, h5, h6,
-button {
-  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
-}
 * {
   transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
 }
@@ -215,44 +202,6 @@ p {
   font-family: var(--font-mono);
 }
 
-.label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--ink-2);
-  text-transform: uppercase;
-}
-
-
-/* ============================================================
-   LAYOUT UTILITIES
-   ============================================================ */
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
-
-@media (max-width: 768px) {
-  .container { padding: 0 20px; }
-}
-
-.section {
-  padding: 110px 32px;
-  position: relative;
-  overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .section { padding: 72px 20px; }
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background: var(--line);
-}
-
 
 /* ============================================================
    ANIMATIONS
@@ -260,16 +209,6 @@ p {
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1);   opacity: 1; }
-  50%       { transform: scale(1.6); opacity: 0.5; }
 }
 
 @keyframes orbFloat {
@@ -288,25 +227,6 @@ p {
   100% { background-position: 0% 50%; }
 }
 
-/* hero object morph — circle ↔ plus feel */
-@keyframes heroObjPop {
-  0%   { transform: scale(0.15) rotate(-90deg); opacity: 0.4; }
-  100% { transform: scale(1) rotate(0deg);       opacity: 1; }
-}
-
-@keyframes objIdle {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-7px); }
-}
-
-.anim-fadeup { animation: fadeUp 0.7s var(--ease-out) both; }
-.anim-fadein { animation: fadeIn 0.6s ease both; }
-
-.delay-1 { animation-delay: 0.08s; }
-.delay-2 { animation-delay: 0.16s; }
-.delay-3 { animation-delay: 0.24s; }
-.delay-4 { animation-delay: 0.32s; }
-
 
 /* ============================================================
    COMPONENTS — theme-aware
@@ -320,14 +240,6 @@ p {
   background-clip: text;
   color: transparent;
   animation: gradientShift 8s ease infinite;
-}
-
-/* Glass surface */
-.glass {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 /* Primary pill */
@@ -400,69 +312,7 @@ p {
 /* Focus visibility */
 .btn-primary:focus-visible,
 .btn-ghost:focus-visible,
-.chip:focus-visible,
-.hero-obj-toggle:focus-visible {
+.chip:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-}
-
-
-/* ============================================================
-   HERO DECORATIVE OBJECTS — dark = round · light = plus
-   ============================================================ */
-.hero-obj {
-  position: absolute;
-  display: block;
-  z-index: 6;
-  color: var(--ink-2);
-  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
-  animation: heroObjPop 0.55s var(--ease-inout), objIdle 6s ease-in-out infinite;
-}
-
-/* round variants (dark mode) */
-.hero-obj-dot {
-  border-radius: 50%;
-  background: var(--ink-2);
-  border: none;
-}
-.hero-obj-ring {
-  border-radius: 50%;
-  border: 1.5px solid var(--line);
-  background: transparent;
-}
-
-/* plus variants (light mode) */
-.hero-obj-plus::before,
-.hero-obj-plus::after {
-  content: '';
-  position: absolute;
-  background: var(--ink-2);
-}
-.hero-obj-plus::before {
-  left: 0; right: 0; top: 46%; height: 8%;
-}
-.hero-obj-plus::after {
-  top: 0; bottom: 0; left: 46%; width: 8%;
-}
-.hero-obj-thick::before { top: 42%; height: 16%; }
-.hero-obj-thick::after  { left: 42%; width: 16%; }
-
-/* the toggle — clickable */
-.hero-obj-toggle {
-  pointer-events: auto;
-  cursor: pointer;
-}
-.hero-obj-toggle:hover {
-  transform: scale(1.22);
-}
-.hero-obj-toggle:active {
-  transform: scale(0.9);
-}
-
-/* large background plus (light) / ring (dark) behind portrait */
-.hero-obj-lg::before {
-  left: 0; right: 0; top: 45%; height: 10%;
-}
-.hero-obj-lg::after {
-  top: 0; bottom: 0; left: 45%; width: 10%;
 }

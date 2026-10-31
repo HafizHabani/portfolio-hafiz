@@ -23,6 +23,8 @@ import previewWebSiskamlingFe from "../assets/preview/web/siskamling-fe.jpg";
 import previewWebSiskamlingBe from "../assets/preview/web/siskamling-be.jpg";
 import previewAndroidSiskamlingFe from "../assets/preview/android/siskamling-fe.jpg";
 import previewAndroidSiskamlingBe from "../assets/preview/android/siskamling-be.jpg";
+import previewWebDmpky from "../assets/preview/web/dmpky.jpg";
+import previewAndroidDmpky from "../assets/preview/android/dmpky.jpg";
 
 const data = {
   name: "Muhammad Hafiz Habani Nelwan",
@@ -89,6 +91,16 @@ const data = {
   projects: [
   {
     id: "01",
+    name: "Duta Mall Palangka Raya (Frontend)",
+    desc: "Concept website for the largest shopping mall in Central Kalimantan — tenant directory, facility showcase, events, and contact form with responsive design.",
+    tags: ["React.js", "Tailwind CSS", "Vite"],
+    year: "2026",
+    link: "https://github.com/HafizHabani/concept-website-dmppky.git",
+    previewWeb: previewWebDmpky,
+    previewAndroid: previewAndroidDmpky
+  },
+  {
+    id: "02",
     name: "SPBE Kabupaten Malang (Frontend)",
     desc: "Government digital services platform built with React.js, featuring responsive UI and Laravel API integration.",
     tags: ["React.js", "Tailwind CSS", "Vite"],
@@ -98,7 +110,7 @@ const data = {
     previewAndroid: previewAndroidSpbeFe
   },
   {
-    id: "02",
+    id: "03",
     name: "SPBE Kabupaten Malang (Backend)",
     desc: "RESTful backend for an e-Government platform with Laravel, authentication, and database management.",
     tags: ["Laravel", "REST API", "MySQL"],
@@ -108,7 +120,7 @@ const data = {
     previewAndroid: previewAndroidSpbeBe,
   },
   {
-    id: "03",
+    id: "04",
     name: "Foodlink (Frontend)",
     desc: "Canteen management platform with food ordering, dashboard, and responsive React interface.",
     tags: ["React.js", "JavaScript", "Tailwind CSS"],
@@ -118,7 +130,7 @@ const data = {
     previewAndroid: previewAndroidFoodlinkFe
   },
   {
-    id: "04",
+    id: "05",
     name: "Foodlink (Backend)",
     desc: "Express + Sequelize backend powering ordering, authentication, payments, and admin panel through REST APIs.",
     tags: ["Node.js", "Express", "MySQL"],
@@ -128,7 +140,7 @@ const data = {
     previewAndroid: previewAndroidFoodlinkBe
   },
   {
-    id: "05",
+    id: "06",
     name: "JaRang (Frontend)",
     desc: "Shipping service landing page with pick-up location, shipment tracking, pricing plans, and responsive contact form.",
     tags: ["PHP", "Bootstrap", "JavaScript"],
@@ -138,7 +150,7 @@ const data = {
     previewAndroid: previewAndroidJarangFe
   },
   {
-    id: "06",
+    id: "07",
     name: "JaRang (Backend)",
     desc: "Admin dashboard with CRUD tables for shipments, senders, receivers, packaging, payments, and delivery tracking.",
     tags: ["PHP", "MySQL", "Bootstrap"],
@@ -148,7 +160,7 @@ const data = {
     previewAndroid: previewAndroidJarangBe
   },
   {
-    id: "07",
+    id: "08",
     name: "SISKAMLING (Frontend)",
     desc: "Neighborhood security management system with patrol scheduling, crime reporting, and attendance tracking for officers and residents.",
     tags: ["HTML5", "Bootstrap", "JavaScript"],
@@ -158,7 +170,7 @@ const data = {
     previewAndroid: previewAndroidSiskamlingFe
   },
   {
-    id: "08",
+    id: "09",
     name: "SISKAMLING (Backend)",
     desc: "Admin dashboard with data tables for officer management, attendance records, patrol schedules, and resident crime reports.",
     tags: ["HTML5", "Bootstrap", "JavaScript"],
@@ -166,7 +178,7 @@ const data = {
     link: "https://github.com/HafizHabani/Raw_Project_SISKAMLING.git",
     previewWeb: previewWebSiskamlingBe,
     previewAndroid: previewAndroidSiskamlingBe
-  }
+  },
 ],
 
   // ============================================================

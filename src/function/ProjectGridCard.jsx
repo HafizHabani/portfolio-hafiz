@@ -13,6 +13,7 @@ const SIMULATED_DOMAINS = {
   "06": "admin.jarang.delivery/dashboard",
   "07": "siskamling.desa.id/patrol",
   "08": "admin.siskamling.desa.id/records",
+  "09": "dutamallpky.co.id",
 };
 
 export default function ProjectGridCard({ project }) {
