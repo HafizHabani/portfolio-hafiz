@@ -4,18 +4,6 @@ import ScrollPreview from "./ScrollPreview";
 import { techIcon } from "../data/techIcons";
 import { FiArrowUpRight, FiMonitor, FiSmartphone, FiGithub } from "react-icons/fi";
 
-const SIMULATED_DOMAINS = {
-  "01": "spbe.malangkab.go.id/portal",
-  "02": "api.spbe.malangkab.go.id/v1",
-  "03": "foodlink.app/canteen-order",
-  "04": "api.foodlink.app/admin",
-  "05": "jarang.delivery/tracking",
-  "06": "admin.jarang.delivery/dashboard",
-  "07": "siskamling.desa.id/patrol",
-  "08": "admin.siskamling.desa.id/records",
-  "09": "dutamallpky.co.id",
-};
-
 export default function ProjectGridCard({ project }) {
   const hasBoth = Boolean(project.previewWeb && project.previewAndroid);
   const [viewMode, setViewMode] = useState(project.previewWeb ? "web" : "android");
@@ -26,7 +14,6 @@ export default function ProjectGridCard({ project }) {
       : project.previewWeb || project.previewAndroid;
 
   const currentLabel = viewMode === "android" ? "UI Android" : "UI Web";
-  const domain = SIMULATED_DOMAINS[project.id] || "github.com/HafizHabani";
 
   return (
     <article className="group flex flex-col h-full rounded-3xl border border-[var(--card-border)] bg-[var(--card)] hover:border-[var(--chip-hover-line)] hover:bg-[var(--card-h)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden shadow-lg">
@@ -38,12 +25,6 @@ export default function ProjectGridCard({ project }) {
           <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]/80" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]/80" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]/80" />
-        </div>
-
-        {/* Simulated URL pill */}
-        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[var(--page)]/70 border border-[var(--line-2)] text-[11px] mono text-[var(--ink-3)] max-w-[240px] truncate">
-          <span className="text-[var(--accent)] text-[10px]">https://</span>
-          <span className="truncate">{domain}</span>
         </div>
 
         {/* View Switcher Tabs (if both exist) */}
